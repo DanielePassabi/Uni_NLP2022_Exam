@@ -1,2 +1,6 @@
 
-03_practical/data
+# Do not upload the dataset, as they weight > 100mb  
+02_network_and_practical/data
+
+# Ignore cache
+*.pyc
