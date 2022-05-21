@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.21)  21 MAY 2022 18:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.21)  21 MAY 2022 18:21
 entering extended mode
 **c:/Users/danyp/Documents/Programmazione/Github/Uni_NLP2022_Exam/02_network_and_practical/report/network_and_practical.tex
 (c:/Users/danyp/Documents/Programmazione/Github/Uni_NLP2022_Exam/02_network_and_practical/report/network_and_practical.tex
@@ -522,16 +522,12 @@ LaTeX Font Info:    Trying to load font information for U+rsfs on input line 132
  (C:\Users\danyp\AppData\Local\Programs\MiKTeX\tex/latex/jknappen\ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-Overfull \hbox (22.69943pt too wide) in paragraph at lines 132--132
- [][] 
- []
-
 <./images//logo.png, id=46, 401.5pt x 401.5pt>
 File: ./images//logo.png Graphic file (type png)
 <use ./images//logo.png>
 Package pdftex.def Info: ./images//logo.png  used on input line 136.
 (pdftex.def)             Requested size: 113.81102pt x 113.80992pt.
-[1
+ [1
 
 {C:/Users/danyp/AppData/Local/MiKTeX/pdftex/config/pdftex.map} <./images//logo.png>] (network_and_practical.toc)
 \tf@toc=\write4
@@ -540,19 +536,19 @@ Package pdftex.def Info: ./images//logo.png  used on input line 136.
  [2]pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.175 \newpage
+l.176 \newpage
                [1
 
 ]
 <./images//data_original_classes.png, id=86, 978.65625pt x 404.26031pt>
 File: ./images//data_original_classes.png Graphic file (type png)
 <use ./images//data_original_classes.png>
-Package pdftex.def Info: ./images//data_original_classes.png  used on input line 198.
+Package pdftex.def Info: ./images//data_original_classes.png  used on input line 199.
 (pdftex.def)             Requested size: 469.75502pt x 194.0489pt.
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.211 \newpage
+l.212 \newpage
                [2 <./images//data_original_classes.png>] [3] [4] [5] [6] (network_and_practical.bbl
 Overfull \hbox (266.91177pt too wide) in paragraph at lines 22--28
 [][]$\OT1/cmtt/m/n/12 https : / / towardsdatascience . com / the-[]importance-[]of-[]natural-[]language-[]processing-[]for-[]non-[]english-[]languages-[]ada463697b9d$[][]\OT1/cmr/m/n/12 .
@@ -576,7 +572,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  60i,7n,63p,610b,377s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\danyp\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/danyp/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/danyp/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/danyp/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/danyp/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/danyp/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on network_and_practical.pdf (9 pages, 138757 bytes).
+Output written on network_and_practical.pdf (9 pages, 138749 bytes).
 PDF statistics:
  150 PDF objects out of 1000 (max. 8388607)
  26 named destinations out of 1000 (max. 500000)
