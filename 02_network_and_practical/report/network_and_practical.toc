@@ -1,0 +1,11 @@
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
+\contentsline {section}{\numberline {2}Data}{2}{section.2}%
+\contentsline {section}{\numberline {3}Model}{3}{section.3}%
+\contentsline {section}{\numberline {4}Experimental Setup}{4}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Data Cleaning and Preprocessing}{4}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Feature Extraction}{4}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Implementing the Architectures}{4}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Training Regime}{4}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Results}{5}{section.5}%
+\contentsline {section}{\numberline {6}Discussion}{6}{section.6}%
+\contentsline {section}{Bibliography}{6}{section.6}%

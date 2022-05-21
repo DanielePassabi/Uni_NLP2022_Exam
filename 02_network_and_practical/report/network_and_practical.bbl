@@ -1,0 +1,29 @@
+\begin{thebibliography}{1}
+
+\bibitem{Chalkidis2021MultiEURLEXA}
+Ilias Chalkidis, Manos Fergadiotis, and Ion Androutsopoulos.
+\newblock {MultiEURLEX - A multi-lingual and multi-label legal document
+  classification dataset for zero-shot cross-lingual transfer}.
+\newblock In {\em EMNLP}, 2021.
+
+\bibitem{IBM_NLP}
+IBM.
+\newblock {Natural Language Processing (NLP)}.
+\newblock \\ \url{https://www.ibm.com/cloud/learn/natural-language-processing}.
+\newblock \\Accessed: 21-05-2022.
+
+\bibitem{nadkarni2011natural}
+Prakash~M Nadkarni, Lucila Ohno-Machado, and Wendy~W Chapman.
+\newblock Natural language processing: an introduction.
+\newblock {\em Journal of the American Medical Informatics Association},
+  18(5):544--551, 2011.
+
+\bibitem{TDS_NLP}
+Towards~Data Science.
+\newblock {The Importance of Natural Language Processing for Non-English
+  Languages}.
+\newblock \\
+  \url{https://towardsdatascience.com/the-importance-of-natural-language-processing-for-non-english-languages-ada463697b9d}.
+\newblock \\Accessed: 21-05-2022.
+
+\end{thebibliography}
