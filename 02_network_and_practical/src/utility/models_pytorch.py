@@ -6,6 +6,7 @@
 # general
 import pandas as pd
 import numpy as np
+import os
 from tqdm import tqdm
 tqdm.pandas()
 
@@ -62,6 +63,12 @@ class PytorchModel():
         self.DROPOUT_P = dropout_p
         self.NUM_CLASSES = len(set(dataset["labels_new"])) # find number of classes (using the whole dataset)
 
+        self.BEST_MEAN_CLASSES_ACCURACY = -1
+
+
+        # we also prepare the string with all the info
+        self.MODEL_DESCRIPTION = f"{model_type}[{language}][batch_size={str(batch_size)}][epochs={str(epochs)}][vocab_size={str(vocab_size)}][emb_dim={str(embedding_dim)}][lr={str(learning_rate)}][dropout={str(dropout_p)}]"
+
         print("> Parameters imported")
 
         # 2. GET THE SPLITS
@@ -101,7 +108,7 @@ class PytorchModel():
 
         # 4. INSTANTIATE THE REQUIRED MODEL
 
-        if self.MODEL_TYPE == "LSTM":
+        if self.MODEL_TYPE == "LSTM_fixed":
 
             self.MODEL = LSTM_fixed_len(
                 vocab_size=self.VOCAB_SIZE, 
@@ -112,11 +119,10 @@ class PytorchModel():
                 device=self.DEVICE
             ).to(self.DEVICE)
 
-
             print(f"> Model '{self.MODEL_TYPE}' instantiated")
-        else:
-            print(f"> Error: model '{self.MODEL_TYPE}' not available. Please choose between ['LSTM' | ]")
 
+        else:
+            print(f"> Error: model '{self.MODEL_TYPE}' not available. Please choose between ['LSTM_fixed']")
 
         # print execution time
         print(f"> Initialization required {round(time.time() - init_start, 4)} seconds")
@@ -133,10 +139,14 @@ class PytorchModel():
             with training results (obtained on both training and validation sets)
         """
 
-        print("=========================================")
+        print("==================================================================================")
         print(f"> Training Started")
         print(f"  - Total Epochs: {self.EPOCHS}")
-        print("=========================================")
+        print("==================================================================================")
+
+        # Debug loss becoming 'nan'
+        #torch.autograd.set_detect_anomaly(True)
+
 
         # setup loss and optimizers
         parameters = filter(lambda p: p.requires_grad, self.MODEL.parameters())
@@ -147,6 +157,7 @@ class PytorchModel():
         df_training_loss = []
         df_validation_loss = []
         df_validation_accuracy = []
+        df_mean_validation_accuracy = []
 
         # for each epoch...
         for i in range(self.EPOCHS):
@@ -165,13 +176,32 @@ class PytorchModel():
                 x = x.long().to(self.DEVICE)
                 y = y.long().to(self.DEVICE)
 
+                # check that there are no NaN or Inf in the tensor
+                assert not torch.isnan(x).any()
+                assert not torch.isnan(y).any()
+
                 # forward pass
                 y_pred = self.MODEL(x, l)
                 optimizer.zero_grad()
+
                 loss = F.cross_entropy(y_pred, y)
+
+                # CHECK FOR VANISHING/EXPLODING GRADIENT
+                if torch.isnan(loss):
+                    print("-------------------------------------------------------------------")
+                    print("WARNING: the loss is now NaN, showing 'y_pred' and 'y'")
+                    print('\ny_pred')
+                    print(y_pred)
+                    print('\ny')
+                    print(y)
+                    print("-------------------------------------------------------------------")
 
                 # backwards pass
                 loss.backward()
+
+                # note: prevent loss from becoming NaN after some iterations
+                torch.nn.utils.clip_grad_norm_(self.MODEL.parameters(), 1)
+
                 optimizer.step()
 
                 sum_loss += loss.item()*y.shape[0]
@@ -185,7 +215,10 @@ class PytorchModel():
             print(f" - Validation Loss      {round(val_loss, 4)}")
             print(f" - Validation Accuracy  {round(float(val_acc), 4)}")
 
-            print(" - Validation Accuracy (per class)")
+            print("\n - Validation Accuracy (per class)")
+
+            cum_acc = 0
+            n = 0
             for key, value in classes_accuracy.items():
 
                 temp_corr = value['correct']
@@ -194,19 +227,49 @@ class PytorchModel():
                 value['accuracy'] = temp_class_acc
                 value['epoch'] = i+1
 
+                # update res
+                cum_acc += temp_class_acc
+                n+=1
+
                 print(f"   * Class {key}\t {temp_class_acc} [{temp_corr} out of {temp_total}]")
-            print("\n=========================================")
+
+            mean_classes_accuracy = round(cum_acc/n, 4)
+            print(f"   * Mean        {mean_classes_accuracy}")
 
             # update list results
             df_epoch.append(i+1)
             df_training_loss.append(round(sum_loss/total, 4))
             df_validation_loss.append(round(val_loss, 4))
             df_validation_accuracy.append(round(float(val_acc), 4))
+            df_mean_validation_accuracy.append(mean_classes_accuracy)
 
             if i == 0:
                 classes_res_df = pd.DataFrame.from_dict(classes_accuracy, orient="index")
             else:
                 classes_res_df = pd.concat([classes_res_df, pd.DataFrame.from_dict(classes_accuracy, orient="index")])
+
+            # save model's dict and info, but only if it is the best epoch (in terms of mean accuracy per class)
+
+            if mean_classes_accuracy > self.BEST_MEAN_CLASSES_ACCURACY:
+
+                # save model (since this epoch has better results than the previous ones)
+                save_path = "models/" + self.MODEL_DESCRIPTION + "_best.model"
+                torch.save(self.MODEL.state_dict(), save_path)
+
+                # we also save a txt file, storing additional information about the best model
+                save_path = "models/" + self.MODEL_DESCRIPTION + "_best.txt"
+                with open(save_path, 'w') as f:
+                    f.write('Model ' + self.MODEL_DESCRIPTION)
+                    f.write(' - Best Epoch: ' + str(i+1))
+                    f.write(' - Mean Classes Accuracy: ' + str(mean_classes_accuracy))
+
+                # notify the user
+                print(f"\n> ATTENTION: epoch {str(i+1)} was the best one so far! The model has been saved :)")
+
+                # update global BEST_MEAN_CLASSES_ACCURACY
+                self.BEST_MEAN_CLASSES_ACCURACY = mean_classes_accuracy
+
+            print("\n==================================================================================")
 
         # create df results and return it
 
@@ -214,14 +277,23 @@ class PytorchModel():
             df_epoch, 
             df_training_loss, 
             df_validation_loss, 
-            df_validation_accuracy
+            df_validation_accuracy,
+            df_mean_validation_accuracy
             )
 
         global_res_df = pd.DataFrame(
             list(custom_zip),
-            columns = ["epoch", "training_loss", "validation_loss", "validation_accuracy"]
+            columns = ["epoch", "training_loss", "validation_loss", "validation_accuracy (global)", "validation_accuracy (mean)"]
             )
-        
+
+        # save dfs
+        save_path = "models/" + self.MODEL_DESCRIPTION + "_global_results.csv"
+        global_res_df.to_csv(save_path, index=False)
+
+        save_path = "models/" + self.MODEL_DESCRIPTION + "_classes_results.csv"
+        classes_res_df.to_csv(save_path, index=False)
+
+        # return them
         return global_res_df, classes_res_df
 
 
@@ -359,8 +431,3 @@ class LSTM_fixed_len(torch.nn.Module):
 
         # Decode the hidden state of the last time step and return
         return self.linear(ht[-1])
-
-
-
-
-
