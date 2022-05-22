@@ -1,6 +1,9 @@
 
-# Do not upload the dataset, as they weight > 100mb  
-02_network_and_practical/data
+# Do not upload the datasets, as they weight > 100mb  
+02_network_and_practical/src/data
+
+# Ignore models folders (too many heavy files, names too long for github)
+02_network_and_practical/src/models 
 
 # Ignore cache
 *.pyc

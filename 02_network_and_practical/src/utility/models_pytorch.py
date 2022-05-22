@@ -67,7 +67,7 @@ class PytorchModel():
 
 
         # we also prepare the string with all the info
-        self.MODEL_DESCRIPTION = f"{model_type}[{language}][batch_size={str(batch_size)}][epochs={str(epochs)}][vocab_size={str(vocab_size)}][emb_dim={str(embedding_dim)}][lr={str(learning_rate)}][dropout={str(dropout_p)}]"
+        self.MODEL_DESCRIPTION = f"{model_type}[{language}][batch_size={str(batch_size)}][epochs={str(epochs)}][vocab_size={str(vocab_size)}][emb_dim={str(embedding_dim)}][hidden_dim={str(hidden_dim)}][lr={str(learning_rate)}][dropout={str(dropout_p)}]"
 
         print("> Parameters imported")
 
@@ -297,9 +297,83 @@ class PytorchModel():
         return global_res_df, classes_res_df
 
 
+    def test_model(self):
+        """
+        Evaluates a model performance on the test set
+
+        Returns
+        -------
+        float, float, dictionary
+            test loss and test accuracy, dictionary with specific classes accuracies
+        """
+
+        # evaluation mode (no need for backwards propagation)
+        self.MODEL.eval()
+
+        # setup placeholders
+        correct = 0
+        total = 0
+        sum_loss = 0.0
+        classes_accuracy = self.__get_classes_accuracy_dict(n_classes=self.NUM_CLASSES)
+
+        for x, y, l in self.TEST_DL:
+
+            # input preprocess
+            x = x.long().to(self.DEVICE)
+            y = y.long().to(self.DEVICE)
+
+            # obtain predictions
+            y_hat = self.MODEL(x, l)
+            loss = F.cross_entropy(y_hat, y)
+            pred = torch.max(y_hat, 1)[1]
+
+            # obtain results
+
+            # accuracy of each class 
+            for prediction, ground_truth in zip(pred, y):
+
+                # update correct if the prediction is correct
+                if int(prediction) == int(ground_truth):
+                    classes_accuracy[int(ground_truth)]["correct"] +=1
+                
+                # update total number of texts in current class
+                classes_accuracy[int(ground_truth)]["total"] +=1
+
+            # global accuracy and loss
+            correct += (pred == y).float().sum()
+            total += y.shape[0]
+            sum_loss += loss.item()*y.shape[0]
+
+        # print global results
+        print(f"> Test Loss:     {round(float(sum_loss/total),4)}")
+        print(f"> Test Accuracy: {round(float(correct/total),4)}")
+
+        # obtain (and print) classes accuracies
+        print("\n> Classes Accuracy")
+        cum_acc = 0
+        n = 0
+        for key, value in classes_accuracy.items():
+
+            temp_corr = value['correct']
+            temp_total = value['total']
+            temp_class_acc = round(temp_corr/temp_total, 4)
+            value['accuracy'] = temp_class_acc
+
+            # update res
+            cum_acc += temp_class_acc
+            n+=1
+
+            print(f"   * Class {key}\t {temp_class_acc} [{temp_corr} out of {temp_total}]")
+
+        mean_classes_accuracy = round(cum_acc/n, 4)
+        print(f"   * Mean        {mean_classes_accuracy}")
+
+        return float(sum_loss/total), float(correct/total), classes_accuracy
+
+
     def __validation_metrics(self):
         """
-        Evaluates a model performance
+        Evaluates a model performance on the validation set
 
         Returns
         -------

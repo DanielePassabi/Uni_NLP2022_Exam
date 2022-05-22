@@ -1,7 +1,7 @@
 import pandas as pd
 import plotly.express as px
 
-def plot_model_fit_loss(train_loss, val_loss, subtitle=""):
+def plot_model_fit_loss(train_loss, val_loss, vertical_line=None, subtitle=""):
     """
     Given the output of the fit model it plots an interactive dataviz of the results (loss)
     """
@@ -29,13 +29,16 @@ def plot_model_fit_loss(train_loss, val_loss, subtitle=""):
         color='type', 
         markers=True,
         title="Model Loss<br><sup>" + subtitle +"<sup>",
-        width=900, height=600)
+        width=1000, height=600)
+
+    if vertical_line is not None:
+        fig.add_vline(x=vertical_line, line_width=2, line_dash="dash", line_color="green")
         
     fig.update_xaxes(range=[0.75, max(res_df["epoch"])+0.25])
     fig.show()
 
 
-def plot_classes_accuracy(classes_res_df, subtitle=""):
+def plot_classes_accuracy(classes_res_df, vertical_line=None, subtitle=""):
     """
     Given the output of the fit model it plots an interactive dataviz of the results (loss)
     """
@@ -81,7 +84,10 @@ def plot_classes_accuracy(classes_res_df, subtitle=""):
         color='Class', 
         markers=True,
         title="Classes Accuracy<br><sup>" + subtitle +"<sup>",
-        width=900, height=600)
-        
+        width=1000, height=600)
+
+    if vertical_line is not None:
+        fig.add_vline(x=vertical_line, line_width=2, line_dash="dash", line_color="green")
+
     fig.update_xaxes(range=[0.75, max(res_df["epoch"])+0.25])
     fig.show()
