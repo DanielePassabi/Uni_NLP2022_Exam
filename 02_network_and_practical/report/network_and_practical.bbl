@@ -1,4 +1,23 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{Albawi2017UnderstandingOA}
+Saad Albawi, Tareq~Abed Mohammed, and Saad Al-Zawi.
+\newblock Understanding of a convolutional neural network.
+\newblock {\em 2017 International Conference on Engineering and Technology
+  (ICET)}, pages 1--6, 2017.
+
+\bibitem{balakrishnan2014stemming}
+Vimala Balakrishnan and Ethel Lloyd-Yemoh.
+\newblock Stemming and lemmatization: a comparison of retrieval performances.
+\newblock 2014.
+
+\bibitem{LSTM_gentle_intro}
+Jason Brownlee.
+\newblock {A Gentle Introduction to Long Short-Term Memory Networks by the
+  Experts}.
+\newblock \\
+  \url{https://machinelearningmastery.com/gentle-introduction-long-short-term-memory-networks-experts/}.
+\newblock \\Accessed: 11-03-2022.
 
 \bibitem{Chalkidis2021MultiEURLEXA}
 Ilias Chalkidis, Manos Fergadiotis, and Ion Androutsopoulos.
@@ -6,11 +25,22 @@ Ilias Chalkidis, Manos Fergadiotis, and Ion Androutsopoulos.
   classification dataset for zero-shot cross-lingual transfer}.
 \newblock In {\em EMNLP}, 2021.
 
+\bibitem{Graves2005FramewisePC}
+Alex Graves and Juergen Schmidhuber.
+\newblock Framewise phoneme classification with bidirectional lstm networks.
+\newblock {\em Proceedings. 2005 IEEE International Joint Conference on Neural
+  Networks, 2005.}, 4:2047--2052 vol. 4, 2005.
+
 \bibitem{IBM_NLP}
 IBM.
 \newblock {Natural Language Processing (NLP)}.
 \newblock \\ \url{https://www.ibm.com/cloud/learn/natural-language-processing}.
 \newblock \\Accessed: 21-05-2022.
+
+\bibitem{lovins1968development}
+Julie~Beth Lovins.
+\newblock Development of a stemming algorithm.
+\newblock {\em Mech. Transl. Comput. Linguistics}, 11(1-2):22--31, 1968.
 
 \bibitem{nadkarni2011natural}
 Prakash~M Nadkarni, Lucila Ohno-Machado, and Wendy~W Chapman.
@@ -25,5 +55,10 @@ Towards~Data Science.
 \newblock \\
   \url{https://towardsdatascience.com/the-importance-of-natural-language-processing-for-non-english-languages-ada463697b9d}.
 \newblock \\Accessed: 21-05-2022.
+
+\bibitem{Zaremba2014RecurrentNN}
+Wojciech Zaremba, Ilya Sutskever, and Oriol Vinyals.
+\newblock Recurrent neural network regularization.
+\newblock {\em ArXiv}, abs/1409.2329, 2014.
 
 \end{thebibliography}
