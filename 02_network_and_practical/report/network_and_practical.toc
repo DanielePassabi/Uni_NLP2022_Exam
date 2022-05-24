@@ -1,15 +1,15 @@
 \contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
-\contentsline {section}{\numberline {2}Data}{2}{section.2}%
-\contentsline {section}{\numberline {3}Architectures}{3}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Long Short Term Memory}{3}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Convolutional Neural Network}{4}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Linear Support Vector Classifier}{5}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Experimental Setup}{7}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Data Cleaning and Preprocessing}{7}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Feature Extraction}{8}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Implementing the Architectures}{9}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Training Regime}{10}{subsection.4.4}%
-\contentsline {section}{\numberline {5}Results}{11}{section.5}%
+\contentsline {section}{\numberline {2}Data}{1}{section.2}%
+\contentsline {section}{\numberline {3}Architectures}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Long Short Term Memory}{2}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Convolutional Neural Network}{3}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Linear Support Vector Classifier}{4}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Experimental Setup}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Data Cleaning and Preprocessing}{5}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Feature Extraction}{5}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Implementing the Architectures}{7}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Training Regime}{8}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Results}{10}{section.5}%
 \contentsline {section}{\numberline {6}Discussion}{12}{section.6}%
 \contentsline {subsection}{\numberline {6.1}About the Results}{12}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}Ideas for Expanding the Project}{12}{subsection.6.2}%

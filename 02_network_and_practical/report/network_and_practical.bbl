@@ -17,7 +17,7 @@ Jason Brownlee.
   Experts}.
 \newblock \\
   \url{https://machinelearningmastery.com/gentle-introduction-long-short-term-memory-networks-experts/}.
-\newblock \\Accessed: 11-03-2022.
+\newblock \\Accessed: 23-05-2022.
 
 \bibitem{Chalkidis2021MultiEURLEXA}
 Ilias Chalkidis, Manos Fergadiotis, and Ion Androutsopoulos.
@@ -47,6 +47,34 @@ Prakash~M Nadkarni, Lucila Ohno-Machado, and Wendy~W Chapman.
 \newblock Natural language processing: an introduction.
 \newblock {\em Journal of the American Medical Informatics Association},
   18(5):544--551, 2011.
+
+\bibitem{pytorch_dropout}
+PyTorch.
+\newblock {Dropout}.
+\newblock \\
+  \url{https://pytorch.org/docs/stable/generated/torch.nn.Dropout.html}.
+\newblock \\Accessed: 24-05-2022.
+
+\bibitem{pytorch_embedding}
+PyTorch.
+\newblock {Embedding}.
+\newblock \\
+  \url{https://pytorch.org/docs/stable/generated/torch.nn.Embedding.html}.
+\newblock \\Accessed: 24-05-2022.
+
+\bibitem{pytorch_linear}
+PyTorch.
+\newblock {Linear}.
+\newblock \\
+  \url{https://pytorch.org/docs/stable/generated/torch.nn.Linear.html}.
+\newblock \\Accessed: 24-05-2022.
+
+\bibitem{pytorch_lstm}
+PyTorch.
+\newblock {LSTM}.
+\newblock \\
+  \url{https://pytorch.org/docs/stable/generated/torch.nn.LSTM.html}.
+\newblock \\Accessed: 24-05-2022.
 
 \bibitem{TDS_NLP}
 Towards~Data Science.

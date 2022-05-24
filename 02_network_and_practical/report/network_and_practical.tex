@@ -1,8 +1,8 @@
-\documentclass[letterpaper,12pt]{article}
+\documentclass[letterpaper,11pt]{article}
 \usepackage{tabularx} % extra features for tabular environment
 \usepackage{amsmath}  % improve math presentation
 \usepackage{graphicx} % takes care of graphic including machinery
-\usepackage[margin=1in,letterpaper]{geometry} % decreases margins
+\usepackage[margin=0.75in,letterpaper]{geometry} % decreases margins
 \usepackage{cite} % takes care of citations
 \usepackage[final]{hyperref} % adds hyper links inside the generated pdf file
 \hypersetup{
@@ -91,6 +91,15 @@
 % custom citations
 \usepackage{cite}
 
+% images wrappers
+
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
+% page background color
+\usepackage{xcolor}
+\definecolor{resblack}{RGB}{30,30,30}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % CUSTOM PYTHON CODE
@@ -170,22 +179,21 @@ Natural Language Processing is used to solve a wide range of tasks: in this work
 
 Our objective aims to test whether different languages can influence architectures such as neural networks or statistical models. To this end, we used a dataset containing 65000 European laws, officially translated into several languages, on which we were able to compare the behaviour of various architectures, both with regard to fine-tuning and their performance.
 
-The project code is public and available both on \href{https://github.com/DanielePassabi/Uni_NLP2022_Exam}{Github}.
+The project code is public and available on \href{https://github.com/DanielePassabi/Uni_NLP2022_Exam}{Github}.
  
 
 
 %%%%%%%%
 % DATA %
 %%%%%%%%
-\newpage
 \section{Data}
 
-The chosen dataset, available on \href{https://huggingface.co/datasets/multi_eurlex}{HuggingFace}, comprises 65000 European laws officially translated into 23 languages. 
+The chosen dataset is called \textit{MultiEURLEX} and is available on \href{https://huggingface.co/datasets/multi_eurlex}{HuggingFace}. It comprises 65000 European laws officially translated into 23 languages. 
 
 Of these available languages, five were selected, based on their adoption at European level:
 
 \begin{itemize}
-  \itemsep-0.3em
+  \itemsep-0.1em
   \item \textit{English}, with 51\% EU speakers
   \item \textit{German}, with 32\% EU speakers
   \item \textit{Italian}, with 16\% EU speakers
@@ -194,9 +202,11 @@ Of these available languages, five were selected, based on their adoption at Eur
 \end{itemize}
 
 
-For each text in the dataset, there are one or more labels annotated. However, as can be understood by reading the paper on the dataset, these annotations are \textit{granular} \cite{Chalkidis2021MultiEURLEXA}. This allowed us to keep only the first level of labels, transforming the problem from a multi-label task to a multi-class one. This operation both simplified the problem and facilitated the evaluation of the architectures results.
+For each text in the dataset, there are one or more labels annotated. However, as can be understood by reading the paper on the dataset, these annotations are \textit{granular} \cite{Chalkidis2021MultiEURLEXA}. This allowed us to keep only the first level of labels, transforming the problem from a multi-label task to a multi-class one. This operation both simplified the classification and facilitated the evaluation of the architectures results.
 
 This resulted in 21 different classes being initially present, shown in Figure \ref{fig:original_classes} together with the number of occurrences (texts) available for each of them.
+
+A preliminary analysis of the data, however, revealed that each law averaged around 1000 words, with slight fluctuations depending on the considered language. Being aware that this factor would be computationally burdensome during the training phase of the models, it was decided to choose 2000 random laws from each of the three classes with the most observations, i.e. class 2, 3 and 18.
 
 \begin{figure}[H]
   \centering
@@ -206,38 +216,36 @@ This resulted in 21 different classes being initially present, shown in Figure \
 \end{figure}
 
 
-A preliminary analysis of the data, however, revealed that each law averaged around 1000 words, with slight fluctuations depending on the considered language. Being aware that this factor would be computationally burdensome during the training phase of the models, it was decided to choose 2000 random laws from the three classes with the most observations, i.e. class 2, 3 and 18.
 
 Ultimately, the final dataset consists of 6000 laws, officially translated into 5 languages and belonging to 3 distinct classes.
 
 %%%%%%%%%%%%%%%%%
 % ARCHITECTURES %
 %%%%%%%%%%%%%%%%%
-\newpage
 \section{Architectures}
 \label{sec:architectures}
 
-In order to test the impact of different languages, various architectures were chosen, belonging both to the world of neural networks and statistics. They are presented below.
+In order to test the impact of different languages, various architectures were chosen, belonging both to the world of neural networks and statistics.
+
+For reasons of limited space, one architecture per typology is presented in detail: for recurrent neural networks, the functioning of an LSTM is explained in depth; for statistical models, the Linear Support Vector Classifier is illustrated. Nevertheless, the CNN architecture is briefly introduced.
 
 \subsection{Long Short Term Memory}
 
 The Long Short Term Memory (LSTM) is a kind of Recurrent Neural Network (RNN). RNNs are a type of networks particularly suited to the use of sequential data, or time series. 
 
-A distinguishing characteristic from the traditional neural networks is their capacity to have a \textit{memory}: they use information obtained from previous inputs to modify their behaviour on the current input and output. They keep the information of the former inputs in memory for an unspecified time, which depends on the weight of the network nodes and the specific data. Recurrent Neural Networks do not assume that input and output are independent, as traditional networks do, but make their output depend on the previous elements in the sequence.
-
-Figure \ref{figure:fnn_vs_rnn} shows the typical structure of a Feedforward Neural Network on the left, and that of a Recurrent Neural Network on the right.
+A distinguishing characteristic from the traditional neural networks is their capacity to have a \textit{memory}: they use information obtained from previous inputs to modify their behaviour on the current input and output. They keep the information of the former inputs in memory for an unspecified time, which depends on the weight of the network nodes and the specific data. Recurrent Neural Networks do not assume that input and output are independent, as traditional networks do, but make their output depend on the previous elements in the sequence. Figure \ref{figure:fnn_vs_rnn} shows the typical structure of a Feedforward Neural Network on the left, and that of a Recurrent Neural Network on the right.
 
 \vspace{0.25cm}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=9.5cm]{feedforward_vs_recurrent_nn.png}
+  \includegraphics[width=6.9cm]{feedforward_vs_recurrent_nn.png}
   \caption{Structure of Feedforward and Recurrent Neural Networks}
   \label{figure:fnn_vs_rnn}
 \end{figure}
 
 Recurrent Neural Networks use an algorithm of \textit{backpropagation through time} to determine gradients. Backpropagation is at the basis of neural networks training, making possible the fine tuning of their weights, based on the results obtained in the previous epochs. The \textit{gradient} refers to the derivative of a function that has more than one input variable; it measures the change in all the weights of the network with respect to the change error. 
 
-During this operation, RNNs tend to encounter two types of problems, both arising from the size of the gradient:
+During this operation, recurrent neural networks tend to encounter two types of problems, both arising from the size of the gradient:
 \begin{itemize}
   \item \textit{Vanishing Gradients}
   
@@ -270,49 +278,46 @@ LSTMs achieve remarkably high performance on major and complex tasks; these incl
 
 Convolutional Neural Networks (CNN) are one of the most renowned algorithms of Deep Learning. Under the Deep Learning category fall all those Artificial Neural Networks that have more than one layer (and are thus called multi-layer architectures).
 
-The layers of CNNs are usually the following:
+The layers of CNNs are usually the following: \textit{Convolutional Layer}, \textit{Non-Linearity Layer}, \textit{Pooling Layer} and \textit{Fully Connected Layer}.
 
-\begin{itemize}
-  \item \textit{Convolutional Layer}
-  \item \textit{Non-Linearity Layer}
-  \item \textit{Pooling Layer}
-  \item \textit{Fully Connected Layer}
-\end{itemize}
-
-The models that use Convolutional Neural Networks have shown over the years that they are able to achieve state of the art results in many Machine Learning problems. CNNs perform particularly well in image classification and computer vision tasks, but also in problems of Natural Language Processing \cite{Albawi2017UnderstandingOA}.
+The architectures that use Convolutional Neural Networks have shown over the years that they are able to achieve state of the art results in many Machine Learning problems. CNNs perform particularly well in image classification and computer vision tasks, but they have also proven powerful in problems of Natural Language Processing \cite{Albawi2017UnderstandingOA}.
 
 \subsection{Linear Support Vector Classifier}
 
 In order to fully understand the idea behind the Linear Support Vector Classifier, it is first necessary to introduce some concepts that form its foundation.
 
-First, let us introduce the notion of \textit{hyperplane}. Intuitively, it is possible to think of the hyperplane as something that divides space into two sides, where it is straightforward to determine in which of the two sides a point is located. An example of a hyperplane in two-dimensional space can be observed in Figure \ref{figure:hyperplane_2d}.
+First, let us introduce the notion of \textit{hyperplane}. Intuitively, it is possible to think of the hyperplane as something that divides space into two sides, where it is straightforward to determine in which of the two sides a point is located. An example of a hyperplane in two-dimensional space can be observed in Fig. \ref{figure:hyperplane_2d}.
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=8.5cm]{hyperplane_example.png}
-  \caption{Example of Hyperplane in 2D case}
+\begin{wrapfigure}{R}{0.35\textwidth}
+  \includegraphics[width=6cm]{hyperplane_example.png}
+  \caption{Hyperplane in 2D case}
   \label{figure:hyperplane_2d}
-\end{figure}
+
+  \vspace{1.15cm}
+
+  \includegraphics[width=6cm]{max_hyperplane.png}
+  \caption{Maximum Margin Hyperplane and Support Vectors (highlighted points)}
+  \label{figure:max_margin_classifier}
+\end{wrapfigure}
+
 
 The visualisation also suggests how a hyperplane can be used to classify different observations. Let's suppose that the points in the figure represent the training set, i.e. the data initially available for training a model. It is then possible to construct a classifier in a very straightforward way: new points will be classified into \textit{green} or \textit{yellow observations} according to their position in space, given by $X_1$ and $X_2$.
 
 Depending on how close the new observation is to the hyperplane it is also possible to have a certain degree of confidence in the correctness of the prediction. For points close to the separating hyperplane we are less certain about their class than for those further away.
 
-There can exist an infinite number of different hyperplanes able to separate the green observations from the yellow ones. For this reason it is necessary to decide how to choose the \textit{best} hyperplane. An appropriate choice is to use the \textit{maximal margin hyperplane}, which is the hyperplane most distant from the training observations. It depends entirely on the so-called \textit{support vectors}, i.e. the points closest to it that influence its position and orientation. See Figure \ref{figure:max_margin_classifier} for an example.
+% \begin{wrapfigure}{R}{0.35\textwidth}
+%   \includegraphics[width=6cm]{max_hyperplane.png}
+%   \caption{Maximum Margin Hyperplane and Support Vectors (highlighted points)}
+%   \label{figure:max_margin_classifier}
+% \end{wrapfigure}
 
-\vspace{0.25cm}
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=8.5cm]{max_hyperplane.png}
-  \caption{Example of Maximum Margin Hyperplane and Support Vectors (highlighted points)}
-  \label{figure:max_margin_classifier}
-\end{figure}
+There can exist an infinite number of different hyperplanes able to separate the green observations from the yellow ones. For this reason it is necessary to decide how to choose the \textit{best} hyperplane. An appropriate choice is to use the \textit{maximal margin hyperplane}, which is the hyperplane most distant from the training observations. It depends entirely on the so-called \textit{support vectors}, i.e. the points closest to it that influence its position and orientation. See Figure \ref{figure:max_margin_classifier} for an example.
 
 Until now we have discussed a binary case in which the two classes were linearly separable. In the event that they are not, as it happens in many real world cases, it is no longer possible to find the maximum margin hyperplane. Even if it were possible to find it, using it is not always the best solution: trying to perfectly separate the observations of the two classes makes the maximum margin hyperplane very sensitive to individual observations. It may be a better solution, in many cases, to consider a hyperplane that does not perfectly separate the training observations, but that allows to obtain a higher robustness regarding the individual observations and that correctly classifies most of the training observations.
 
 This is indeed the objective of the support vector classifier. The model purposely allows the misclassification of certain observations, in order to correctly classify as many points as possible, while maximising the width of the margin.
 
-Since we are not in a binary classification, we extended the binary approach to a multiclass approach using the \textit{One-VS-Rest} scheme.
+Since in our specific case we are working with 3 classes, we are not in a binary classification scenario. We have therefore extended the binary approach to a multiclass approach using the scheme \textit{One-VS-Rest}. It is a heuristic that allows us to split our multiclass dataset into multiple binary classification problems.
 
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -348,7 +353,7 @@ Another technique used when working with texts and natural language is to apply 
 
 However, the same logic of stopwords applies to \textit{stemming} and \textit{lemmatisation} procedures, which are therefore not applied to texts.
 
-The dataset has a very high quality: it was therefore only necessary to lowercase all words, remove symbols and non-unicode characters, in order to ensure the proper functioning of future architectures.
+The dataset has a very high quality: it was thus only necessary to lowercase all words, remove symbols and non-unicode characters, in order to ensure the proper functioning of future architectures.
 
 \subsection{Feature Extraction}
 
@@ -358,7 +363,7 @@ There are several ways of extracting information from data, and they change depe
 
 \subsubsection*{Feature Extraction for Recurrent Neural Networks}
 
-With regard to the creation of features for the recurrent neural networks used, namely Long Short Memory and Convolutional Neural Network, we performed the following procedures:
+With regard to the creation of features for the recurrent neural networks used, namely Long Short Term Memory and Convolutional Neural Network, we performed the following procedures:
 
 \begin{itemize}
   \item \textit{Tokenization}
@@ -420,25 +425,59 @@ With regard to the creation of features for the recurrent neural networks used, 
 
 \subsubsection*{Feature Extraction for Linear Support Vector Classifier}
 
-\textit{TODO: scrivere questa parte dopo aver implementato Linear SVC con TF-IDF}
+Text Vectorization is a technique that consists of transforming textual data into numerical vectors that can be understood by machine learning architectures.
+
+One of the most widely adopted techniques for text vectorization is \textit{Term Frequency - Inverse Document Frequency} (TF-IDF), a statistical measure that assesses how relevant a word is to a document in a collection of documents.
+
+In the case of tickets classification, the text of each ticket represents one document.
+
+The TF-IDF score for a word is obtained by multiplying the two metrics that compose the algorithm:
+
+\begin{itemize}
+  \item \textit{Term Frequency (TF)}
+  
+  In its simplest form, it refers to the number of times a word appears in a document.
+
+  \item \textit{Inverse Document Frequency}
+  
+  It refers to how common a word is in the entire set of sentences. The more frequent a word is, the closer its value is to 0.
+
+  It is possible to calculate the IDF of a word by obtaining the total number of documents, dividing it by the number of documents containing that given word and computing the logarithm.
+\end{itemize}
+
+Multiplying these two values makes it possible to obtain the TF-IDF of a word in a document. The higher the value, the greater the relevance of the word within a document.
+
+The TF-IDF is an efficient solution to the problem of \textit{stopwords}: since they are frequent words in all documents, they have a value very close to zero and do not become influential for the models.
+
+If a word is repeated many times within the same document, on the contrary, it might indicate its importance. The algorithm is able to detect these subtleties and is a particularly effective way of preparing the input for future architectures.
+
 
 \subsection{Implementing the Architectures}
 
+A brief description of the implementation of the architectures presented in section \ref{sec:architectures} follows.. In the case of recurrent neural networks, we focus on the employed layers.
+
 \subsubsection*{Long Short Term Memory}
 
-The architecture was developed using the \verb|PyTorch| framework.
-
-The recurrent network, described in Section \ref{sec:architectures}, was implemented with the following layers:
+The architecture was developed using the \verb|PyTorch| framework. 
+In the development of the network, the following layers were used:
 
 \begin{itemize}
   \item \textit{Embedding Layer}
+  
+  This layer is often used to store and retrieve word embeddings using indexes. The input of the module is a list of indexes and the output is the corresponding word embedding \cite{pytorch_embedding}.
   \item \textit{LSTM Layer}
+  
+  As one can easily deduce from its name, this module is the heart of the network. It applies a multi-layer long short-term memory to an input sequence \cite{pytorch_lstm}.
   \item \textit{Linear Layer}
+  
+  Its purpose is to apply a linear transformation to the input data \cite{pytorch_linear}.
   \item \textit{Dropout Layer}
+  
+  During the training phase, some elements of the input tensor are zeroed with probability $p$, using samples of a Bernoulli distribution.
+
+  This technique has proven to be effective in regularising and preventing co-adaptation of neurons \cite{pytorch_dropout}. However, as will be seen in the results section, the networks that performed best were always those in which the dropout probability $p$ was 0. 
 \end{itemize}
 
-
-\textit{TODO: aggiungere visualizzazione della rete migliore}
 
 % USA QUESTO CODICE
 % input_names = ['Law Text']
@@ -456,6 +495,59 @@ This architecture, like the LSTM, was also implemented via \verb|PyTorch|.
 \textit{TODO: implementare in SKLearn}
 
 \subsection{Training Regime}
+\label{subsec:fine_tuning}
+
+During the course of the project, particular emphasis was placed on fine-tuning the models. A detailed explanation of what was performed for each architecture follows.
+
+\subsubsection*{Long Short Term Memory}
+
+For each of the five available languages, 16 models were trained, i.e. the combination of a grid search performed on the following hyperparameters.
+
+\begin{itemize}
+  \item \textit{Embedding Dim} 
+  \begin{itemize}
+    \vspace{-0.3em}
+    \itemsep-0.35em
+    \item Layer: Embedding
+    \item Tested values: 1024, 2048 
+  \end{itemize}
+  \item \textit{Hidden Dim}
+  \begin{itemize}
+    \vspace{-0.3em}
+    \itemsep-0.35em
+    \item Layer: LSTM
+    \item Tested values: 1024, 2048 
+  \end{itemize}
+  \item \textit{Learning Rate}
+  \begin{itemize}
+    \vspace{-0.3em}
+    \itemsep-0.35em
+    \item Used by Adam optimizer
+    \item Tested values: 0.0001, 0.001
+  \end{itemize}
+  \item \textit{Dropout P}
+  \begin{itemize}
+    \vspace{-0.3em}
+    \itemsep-0.35em
+    \item Layer: Dropout
+    \item Tested values: 0, 0.1 
+  \end{itemize}
+\end{itemize}
+
+It is worth noting that each dataset was divided upstream into three parts: \textit{training} (3840 texts), \textit{validation} (960 texts) and \textit{test} set (1200 texts). During each epoch, the recurrent neural network was trained on the training set and validated on the validation one. An automatic mechanism was implemented that was able to save the model weights of the best epoch based on the average accuracy of the three classes, along with a dataframe containing the training results. This allowed us to understand what occurred during the training and to observe the differences of the individual languages. We will further discuss training results in Section \ref{sec:results}.
+
+\subsubsection*{Convolutional Neural Network}
+
+\textit{TODO: implementare in Pytorch}
+
+\subsubsection*{Linear Support Vector Classifier}
+
+\textit{TODO: implementare in SKLearn}
+
+
+
+
+
 
 
 
@@ -464,13 +556,32 @@ This architecture, like the LSTM, was also implemented via \verb|PyTorch|.
 %%%%%%%%%%%
 \newpage
 \section{Results}
+\label{sec:results}
 
+Per prima cosa parlare dei risultati ottenuti sul test set.
+
+Successivamente fare una piccola riflessione sulla fase di training dei modelli e le differenze trovate tra le diverse lingue.
+
+Risultati del training in Figure \ref{figure:lstm_res}.
+
+\newpage
+\pagecolor{resblack}
+\begin{figure}[H]
+  \vspace*{-1.75cm}
+  \makebox[\linewidth]{
+    \includegraphics[width=0.995\linewidth]{LSTM_training_results.png}
+  }
+  \caption{}
+  \label{figure:lstm_res}
+\end{figure}
+\thispagestyle{empty}
 
 
 %%%%%%%%%%%%%%
 % DISCUSSION %
 %%%%%%%%%%%%%%
 \newpage
+\pagecolor{white}
 \section{Discussion}
 
 \subsection{About the Results}
@@ -488,6 +599,7 @@ The following is a list of suggestions and ideas through which the project could
   \item Furthermore, it would also be worthwhile to consider the multi-label task and observe how the architectures behave in different languages.
   \item Having multiple GPUs avalaible, the experiment could be repeated using all 23 languages from the initial dataset.
   \item A further idea is to try applying stopword removal, lemmatization and/or stemming procedures to texts. The aim here is to see if and how the performance of the models changes and if the procedures favour the most common languages.
+  \item With regard to the fine-tuning phase, as already mentioned in the relevant subsection \ref{subsec:fine_tuning}, it would be advisable to extend the range of values used for each hyper-parameter in order to obtain more robust results. 
 \end{itemize}
 
 %%%%%%%%%%%%%%%%
