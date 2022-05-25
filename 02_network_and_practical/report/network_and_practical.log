@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.9.9)  24 MAY 2022 20:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.9.9)  25 MAY 2022 15:10
 entering extended mode
 **c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/02_network_and_practical/report/network_and_practical.tex
 (c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/02_network_and_practical/report/network_and_practical.tex
@@ -510,7 +510,7 @@ LaTeX Font Info:    Trying to load font information for U+rsfs on input line 145
  (C:\Users\Daniele\AppData\Local\Programs\MiKTeX\tex/latex/jknappen\ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-<./images/logo.png, id=66, 401.5pt x 401.5pt>
+<./images/logo.png, id=78, 401.5pt x 401.5pt>
 File: ./images/logo.png Graphic file (type png)
 <use ./images/logo.png>
 Package pdftex.def Info: ./images/logo.png  used on input line 149.
@@ -522,7 +522,7 @@ Package pdftex.def Info: ./images/logo.png  used on input line 149.
 \openout4 = `network_and_practical.toc'.
 
  [2]
-<./images/data_original_classes.png, id=107, 978.65625pt x 404.26031pt>
+<./images/data_original_classes.png, id=122, 978.65625pt x 404.26031pt>
 File: ./images/data_original_classes.png Graphic file (type png)
 <use ./images/data_original_classes.png>
 Package pdftex.def Info: ./images/data_original_classes.png  used on input line 213.
@@ -534,7 +534,7 @@ l.217
        [1
 
 ]
-<./images/feedforward_vs_recurrent_nn.png, id=120, 784.43062pt x 362.10281pt>
+<./images/feedforward_vs_recurrent_nn.png, id=135, 784.43062pt x 362.10281pt>
 File: ./images/feedforward_vs_recurrent_nn.png Graphic file (type png)
 <use ./images/feedforward_vs_recurrent_nn.png>
 Package pdftex.def Info: ./images/feedforward_vs_recurrent_nn.png  used on input line 241.
@@ -544,22 +544,22 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has b
                    \relax 
 l.247 
        [2 <./images/data_original_classes.png> <./images/feedforward_vs_recurrent_nn.png>] [3]
-<./images/hyperplane_example.png, id=143, 867.24pt x 879.285pt>
+<./images/hyperplane_example.png, id=158, 867.24pt x 879.285pt>
 File: ./images/hyperplane_example.png Graphic file (type png)
 <use ./images/hyperplane_example.png>
 Package pdftex.def Info: ./images/hyperplane_example.png  used on input line 292.
 (pdftex.def)             Requested size: 170.71652pt x 173.0766pt.
-<./images/max_hyperplane.png, id=144, 868.74562pt x 797.98125pt>
+<./images/max_hyperplane.png, id=159, 868.74562pt x 797.98125pt>
 File: ./images/max_hyperplane.png Graphic file (type png)
 <use ./images/max_hyperplane.png>
 Package pdftex.def Info: ./images/max_hyperplane.png  used on input line 298.
 (pdftex.def)             Requested size: 170.71652pt x 156.80507pt.
  [4 <./images/hyperplane_example.png> <./images/max_hyperplane.png>] [5] [6] [7] [8] [9] [10]
 \GPT@outputbox=\box57
-<./images/LSTM_training_results.png, id=208, 1743.51375pt x 2714.64188pt>
+<./images/LSTM_training_results.png, id=223, 1743.51375pt x 2714.64188pt>
 File: ./images/LSTM_training_results.png Graphic file (type png)
 <use ./images/LSTM_training_results.png>
-Package pdftex.def Info: ./images/LSTM_training_results.png  used on input line 573.
+Package pdftex.def Info: ./images/LSTM_training_results.png  used on input line 584.
 (pdftex.def)             Requested size: 503.35808pt x 783.70512pt.
 
 Overfull \vbox (59.94785pt too high) has occurred while \output is active []
@@ -575,28 +575,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 80--86
  []
 
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 618.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 629.
  [13]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 618.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 629.
  (c:/Users\Daniele\Documents\Programmazione\Github\Uni_NLP2022_Exam\02_network_and_practical\report\network_and_practical.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 618.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 618.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 629.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 629.
 Package rerunfilecheck Info: File `network_and_practical.out' has not changed.
-(rerunfilecheck)             Checksum: 8F4DBDC51F24879CB4BECBFC1F839A3F;998.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 618.
+(rerunfilecheck)             Checksum: 1550EE31C5277F8B1887FC6688AF88C0;1195.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 629.
  ) 
 Here is how much of TeX's memory you used:
- 11691 strings out of 480790
- 180606 string characters out of 2896364
+ 11697 strings out of 480790
+ 180696 string characters out of 2896364
  466094 words of memory out of 3000000
- 27419 multiletter control sequences out of 15000+200000
+ 27422 multiletter control sequences out of 15000+200000
  542531 words of font info for 63 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,9n,43p,1022b,418s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Daniele\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Users/Daniele/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Daniele/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Daniele/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Daniele/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Daniele/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Daniele/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Daniele/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Daniele/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Daniele/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on c:/Users\Daniele\Documents\Programmazione\Github\Uni_NLP2022_Exam\02_network_and_practical\report\network_and_practical.pdf (15 pages, 866770 bytes).
+Output written on c:/Users\Daniele\Documents\Programmazione\Github\Uni_NLP2022_Exam\02_network_and_practical\report\network_and_practical.pdf (15 pages, 942702 bytes).
 PDF statistics:
- 283 PDF objects out of 1000 (max. 8388607)
- 63 named destinations out of 1000 (max. 500000)
- 159 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 298 PDF objects out of 1000 (max. 8388607)
+ 66 named destinations out of 1000 (max. 500000)
+ 183 words of extra memory for PDF output out of 10000 (max. 10000000)
 

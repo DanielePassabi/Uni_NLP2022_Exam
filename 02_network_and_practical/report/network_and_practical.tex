@@ -286,7 +286,7 @@ The architectures that use Convolutional Neural Networks have shown over the yea
 
 In order to fully understand the idea behind the Linear Support Vector Classifier, it is first necessary to introduce some concepts that form its foundation.
 
-First, let us introduce the notion of \textit{hyperplane}. Intuitively, it is possible to think of the hyperplane as something that divides space into two sides, where it is straightforward to determine in which of the two sides a point is located. An example of a hyperplane in two-dimensional space can be observed in Fig. \ref{figure:hyperplane_2d}.
+First, let us introduce the notion of \textit{hyperplane}. Intuitively, it is possible to think of the hyperplane as something that divides space into two sides, where it is straightforward to determine in which of the two sides a point is located. An example of hyperplane in two-dimensional space can be observed in Figure \ref{figure:hyperplane_2d}.
 
 \begin{wrapfigure}{R}{0.35\textwidth}
   \includegraphics[width=6cm]{hyperplane_example.png}
@@ -315,7 +315,7 @@ There can exist an infinite number of different hyperplanes able to separate the
 
 Until now we have discussed a binary case in which the two classes were linearly separable. In the event that they are not, as it happens in many real world cases, it is no longer possible to find the maximum margin hyperplane. Even if it were possible to find it, using it is not always the best solution: trying to perfectly separate the observations of the two classes makes the maximum margin hyperplane very sensitive to individual observations. It may be a better solution, in many cases, to consider a hyperplane that does not perfectly separate the training observations, but that allows to obtain a higher robustness regarding the individual observations and that correctly classifies most of the training observations.
 
-This is indeed the objective of the support vector classifier. The model purposely allows the misclassification of certain observations, in order to correctly classify as many points as possible, while maximising the width of the margin.
+This is indeed the objective of the Linear Support Vector Classifier. The model purposely allows the misclassification of certain observations, in order to correctly classify as many points as possible, while maximising the width of the margin.
 
 Since in our specific case we are working with 3 classes, we are not in a binary classification scenario. We have therefore extended the binary approach to a multiclass approach using the scheme \textit{One-VS-Rest}. It is a heuristic that allows us to split our multiclass dataset into multiple binary classification problems.
 
@@ -351,7 +351,7 @@ Another technique used when working with texts and natural language is to apply 
 
 \end{itemize}
 
-However, the same logic of stopwords applies to \textit{stemming} and \textit{lemmatisation} procedures, which are therefore not applied to texts.
+However, the same logic of stopwords applies to {stemming} and {lemmatization} procedures, which are therefore not applied to texts.
 
 The dataset has a very high quality: it was thus only necessary to lowercase all words, remove symbols and non-unicode characters, in order to ensure the proper functioning of future architectures.
 
@@ -359,7 +359,7 @@ The dataset has a very high quality: it was thus only necessary to lowercase all
 
 Feature extraction describes the process of transforming raw data into numerical features that can be processed while retaining the information in the original dataset.
 
-There are several ways of extracting information from data, and they change depending on the type of input that is being handled. In the context of this work, the primary focus is on the extraction of features from natural language. This can be achieved by means of several procedures, described below.
+There are several ways of extracting information from data, and they change depending on the type of input that is being handled. In the context of this work, the primary focus is on the extraction of features from natural language. The procedures employed are outlined below.
 
 \subsubsection*{Feature Extraction for Recurrent Neural Networks}
 
@@ -368,7 +368,7 @@ With regard to the creation of features for the recurrent neural networks used, 
 \begin{itemize}
   \item \textit{Tokenization}
   
-  Tokenization involves breaking up a raw text into smaller pieces. In our case, we break down each law text into words, the tokens. 
+  It involves breaking up a raw text into smaller pieces. In our case, we break down each law text into words, the tokens. 
 
   \item \textit{Count Token Occurrences}
   
@@ -454,11 +454,11 @@ If a word is repeated many times within the same document, on the contrary, it m
 
 \subsection{Implementing the Architectures}
 
-A brief description of the implementation of the architectures presented in section \ref{sec:architectures} follows.. In the case of recurrent neural networks, we focus on the employed layers.
+A brief description of the implementation of the architectures presented in Section \ref{sec:architectures} follows. In the case of recurrent neural networks, we focus on the employed layers.
 
 \subsubsection*{Long Short Term Memory}
 
-The architecture was developed using the \verb|PyTorch| framework. 
+The architecture was implemented using the \verb|PyTorch| framework. 
 In the development of the network, the following layers were used:
 
 \begin{itemize}
@@ -534,7 +534,9 @@ For each of the five available languages, 16 models were trained, i.e. the combi
   \end{itemize}
 \end{itemize}
 
-It is worth noting that each dataset was divided upstream into three parts: \textit{training} (3840 texts), \textit{validation} (960 texts) and \textit{test} set (1200 texts). During each epoch, the recurrent neural network was trained on the training set and validated on the validation one. An automatic mechanism was implemented that was able to save the model weights of the best epoch based on the average accuracy of the three classes, along with a dataframe containing the training results. This allowed us to understand what occurred during the training and to observe the differences of the individual languages. We will further discuss training results in Section \ref{sec:results}.
+It is worth noting that each dataset was divided upstream into three parts: \textit{training} (3840 texts), \textit{validation} (960 texts) and \textit{test} set (1200 texts). During each epoch, the recurrent neural network was trained on the training set and validated on the validation one. Furthermore, we implemented an automatic mechanism capable of saving the model weights of the best epoch based on the average accuracy of the three classes, along with a dataframe containing the training results. This allowed us to understand what occurred during the training and to observe the differences of the individual languages. We will further discuss training results in Section \ref{sec:results}.
+
+Each model was trained for a total of 50 epochs, using a batch size of 64. As a note, we are aware that in order to obtain more robust and reliable results it would have been ideal to increase the number of hyper-parameter values tested, along with the number of epochs. Training times, however, would have risen exponentially. Each complete search grid, which trains 16 models over 50 epochs, takes between 14 and 16 hours on an \textit{RTX2070 Super} GPU, varying according to the language of the texts.
 
 \subsubsection*{Convolutional Neural Network}
 
@@ -558,11 +560,20 @@ It is worth noting that each dataset was divided upstream into three parts: \tex
 \section{Results}
 \label{sec:results}
 
-Per prima cosa parlare dei risultati ottenuti sul test set.
+\subsection{Training Times}
 
-Successivamente fare una piccola riflessione sulla fase di training dei modelli e le differenze trovate tra le diverse lingue.
+Parlare brevemente dei tempi di training.
+
+\subsection{Training Results}
+
+Fare una piccola riflessione sulla fase di training dei modelli e le differenze trovate tra le diverse lingue.
 
 Risultati del training in Figure \ref{figure:lstm_res}.
+
+\subsection{Model Performance}
+
+Esporre i risultati ottenuti sul test set dalle 3 architetture.
+
 
 \newpage
 \pagecolor{resblack}
