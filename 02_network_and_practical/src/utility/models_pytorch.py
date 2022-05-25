@@ -38,38 +38,40 @@ class PytorchModel():
         language, 
         device,
         batch_size, 
-        epochs, 
-        vocab_size,
-        embedding_dim, 
-        hidden_dim,
-        learning_rate,
-        dropout_p
+        epochs,
+        **kwargs
         ) -> None:
 
         # measure init time
         init_start = time.time()
 
-        # 1. SAVE INFO and HYPERPARAMETERS
+        # 1. SAVE INFO and HYPERPARAMETERS [based on model type]
 
-        self.MODEL_TYPE = model_type
-        self.DEVICE = device
-        self.BATCH_SIZE = batch_size
-        self.EPOCHS = epochs
-        
-        self.VOCAB_SIZE = vocab_size        
-        self.EMBEDDING_DIM = embedding_dim
-        self.HIDDEN_DIM = hidden_dim
-        self.LEARNING_RATE = learning_rate
-        self.DROPOUT_P = dropout_p
-        self.NUM_CLASSES = len(set(dataset["labels_new"])) # find number of classes (using the whole dataset)
+        if model_type == "LSTM_fixed":
 
-        self.BEST_MEAN_CLASSES_ACCURACY = -1
+            self.MODEL_TYPE = model_type
+            self.DEVICE = device
+            self.BATCH_SIZE = batch_size
+            self.EPOCHS = epochs
+            
+            self.VOCAB_SIZE = kwargs['vocab_size']        
+            self.EMBEDDING_DIM = kwargs['embedding_dim']
+            self.HIDDEN_DIM = kwargs['hidden_dim']
+            self.LEARNING_RATE = kwargs['learning_rate']
+            self.DROPOUT_P = kwargs['dropout_p']
+            self.NUM_CLASSES = len(set(dataset["labels_new"])) # find number of classes (using the whole dataset)
+
+            self.BEST_MEAN_CLASSES_ACCURACY = -1
 
 
-        # we also prepare the string with all the info
-        self.MODEL_DESCRIPTION = f"{model_type}[{language}][batch_size={str(batch_size)}][epochs={str(epochs)}][vocab_size={str(vocab_size)}][emb_dim={str(embedding_dim)}][hidden_dim={str(hidden_dim)}][lr={str(learning_rate)}][dropout={str(dropout_p)}]"
+            # we also prepare the string with all the info
+            self.MODEL_DESCRIPTION = f"{model_type}[{language}][batch_size={str(batch_size)}][epochs={str(epochs)}][vocab_size={str(self.VOCAB_SIZE)}][emb_dim={str(self.EMBEDDING_DIM)}][hidden_dim={str(self.HIDDEN_DIM)}][lr={str(self.LEARNING_RATE)}][dropout={str(self.DROPOUT_P)}]"
 
-        print("> Parameters imported")
+            print("> Parameters imported")
+
+        else:
+            print("> More will come!")
+            return None
 
         # 2. GET THE SPLITS
         # We can easily do this with the information stored in the 'set' column
