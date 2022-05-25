@@ -356,6 +356,7 @@ However, the same logic of stopwords applies to {stemming} and {lemmatization} p
 The dataset has a very high quality: it was thus only necessary to lowercase all words, remove symbols and non-unicode characters, in order to ensure the proper functioning of future architectures.
 
 \subsection{Feature Extraction}
+\label{subsec:feature_extr}
 
 Feature extraction describes the process of transforming raw data into numerical features that can be processed while retaining the information in the original dataset.
 
@@ -488,16 +489,25 @@ In the development of the network, the following layers were used:
 
 This architecture, like the LSTM, was also implemented via \verb|PyTorch|.
 
-\textit{TODO: implementare in Pytorch}
+\hl{\textit{TODO: implementare in Pytorch}}
+
 
 \subsubsection*{Linear Support Vector Classifier}
 
-\textit{TODO: implementare in SKLearn}
+This architecture was developed using the \verb|scikit-learn| framework. Since it is a more high-level library than \verb|Pytorch|, the implementation was simpler and more straightforward. Most of the work consisted in obtaining suitable features for the model, which was performed via the TF-IDF algorithm presented in subsection \ref{subsec:feature_extr}.
 
 \subsection{Training Regime}
 \label{subsec:fine_tuning}
 
 During the course of the project, particular emphasis was placed on fine-tuning the models. A detailed explanation of what was performed for each architecture follows.
+
+\subsubsection*{Dataset Splits}
+
+Each dataset was divided upstream into three sets: \textit{training} (3840 texts), \textit{validation} (960 texts) and \textit{test} set (1200 texts). 
+
+When training neural networks, during each epoch the model was trained on the training set and validated on the validation one. Furthermore, we implemented an automatic mechanism capable of saving the model weights of the best epoch based on the average accuracy of the three classes, along with a dataframe containing the training results. This allowed us to understand what occurred during the training and to observe the differences of the individual languages. We will further discuss training results in Section \ref{sec:results}.
+
+Saving the results of the Linear SVM statistical model was more straightforward, as we did not have to handle the different epochs.
 
 \subsubsection*{Long Short Term Memory}
 
@@ -534,45 +544,43 @@ For each of the five available languages, 16 models were trained, i.e. the combi
   \end{itemize}
 \end{itemize}
 
-It is worth noting that each dataset was divided upstream into three parts: \textit{training} (3840 texts), \textit{validation} (960 texts) and \textit{test} set (1200 texts). During each epoch, the recurrent neural network was trained on the training set and validated on the validation one. Furthermore, we implemented an automatic mechanism capable of saving the model weights of the best epoch based on the average accuracy of the three classes, along with a dataframe containing the training results. This allowed us to understand what occurred during the training and to observe the differences of the individual languages. We will further discuss training results in Section \ref{sec:results}.
+
 
 Each model was trained for a total of 50 epochs, using a batch size of 64. As a note, we are aware that in order to obtain more robust and reliable results it would have been ideal to increase the number of hyper-parameter values tested, along with the number of epochs. Training times, however, would have risen exponentially. Each complete search grid, which trains 16 models over 50 epochs, takes between 14 and 16 hours on an \textit{RTX2070 Super} GPU, varying according to the language of the texts.
 
 \subsubsection*{Convolutional Neural Network}
 
-\textit{TODO: implementare in Pytorch}
+\hl{\textit{TODO: implementare in Pytorch}}
 
 \subsubsection*{Linear Support Vector Classifier}
 
-\textit{TODO: implementare in SKLearn}
+For this architecture, there are no performance concerns. We therefore trained 7 different models for each language, each with a different value of $C$, the model's only hyperparameter.
 
+$C$ is the parameter responsible for \textit{regularization}, which is inversely proportional to the value. Thus, for high values of $C$ the optimiser will choose a hyperplane with a narrower margin if it correctly classifies all points in the training set. Conversely, a small value of $C$ will cause the optimiser to look for a separating hyperplane with a larger margin, even if this hyperplane incorrectly classifies a greater number of points. 
 
-
-
-
+The values that we tested for the $C$ hyper-parameter are the following: 0.1, 1, 5, 10, 50, 100, 1000.
 
 
 
 %%%%%%%%%%%
 % RESULTS %
 %%%%%%%%%%%
-\newpage
 \section{Results}
 \label{sec:results}
 
 \subsection{Training Times}
 
-Parlare brevemente dei tempi di training.
+\hl{Parlare brevemente dei tempi di training.}
 
 \subsection{Training Results}
 
-Fare una piccola riflessione sulla fase di training dei modelli e le differenze trovate tra le diverse lingue.
+\hl{Fare una piccola riflessione sulla fase di training dei modelli e le differenze trovate tra le diverse lingue.}
 
 Risultati del training in Figure \ref{figure:lstm_res}.
 
 \subsection{Model Performance}
 
-Esporre i risultati ottenuti sul test set dalle 3 architetture.
+\hl{Esporre i risultati ottenuti sul test set dalle 3 architetture.}
 
 
 \newpage
