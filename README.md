@@ -4,4 +4,4 @@
  
 Within this repo you can find:
 1. Paper Review
-2. Practical and Network
+2. Network and Practical
