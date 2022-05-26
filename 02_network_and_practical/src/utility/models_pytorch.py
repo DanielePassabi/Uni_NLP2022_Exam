@@ -9,6 +9,7 @@ import numpy as np
 import os
 from tqdm import tqdm
 tqdm.pandas()
+import math
 
 # dataset
 from torch.utils.data import Dataset, DataLoader
@@ -47,30 +48,50 @@ class PytorchModel():
 
         # 1. SAVE INFO and HYPERPARAMETERS [based on model type]
 
+        # save general parameters (only once)
+        self.MODEL_TYPE = model_type
+        self.DEVICE = device
+        self.BATCH_SIZE = batch_size
+        self.EPOCHS = epochs
+        self.LEARNING_RATE = kwargs['learning_rate']
+
+        self.BEST_MEAN_CLASSES_ACCURACY = -1
+            
+        # LSTM
         if model_type == "LSTM_fixed":
 
-            self.MODEL_TYPE = model_type
-            self.DEVICE = device
-            self.BATCH_SIZE = batch_size
-            self.EPOCHS = epochs
-            
+            # set LSTM specific parameters
             self.VOCAB_SIZE = kwargs['vocab_size']        
             self.EMBEDDING_DIM = kwargs['embedding_dim']
             self.HIDDEN_DIM = kwargs['hidden_dim']
-            self.LEARNING_RATE = kwargs['learning_rate']
             self.DROPOUT_P = kwargs['dropout_p']
             self.NUM_CLASSES = len(set(dataset["labels_new"])) # find number of classes (using the whole dataset)
-
-            self.BEST_MEAN_CLASSES_ACCURACY = -1
-
 
             # we also prepare the string with all the info
             self.MODEL_DESCRIPTION = f"{model_type}[{language}][batch_size={str(batch_size)}][epochs={str(epochs)}][vocab_size={str(self.VOCAB_SIZE)}][emb_dim={str(self.EMBEDDING_DIM)}][hidden_dim={str(self.HIDDEN_DIM)}][lr={str(self.LEARNING_RATE)}][dropout={str(self.DROPOUT_P)}]"
 
-            print("> Parameters imported")
+            print(f"> Parameters imported for {model_type}")
+
+        # CNN
+        elif model_type == "CNN_fixed":
+
+            # set CNN specific parameters
+            self.VOCAB_SIZE = kwargs['vocab_size']   
+            self.EMBEDDING_DIM = kwargs['embedding_dim']
+            self.OUT_CHANNELS = kwargs['out_channels']
+            self.KERNEL_SIZE = kwargs['kernel_size']
+            self.STRIDE = kwargs['stride']
+            self.PADDING = kwargs['padding']
+            self.DROPOUT_P = kwargs['dropout_p']
+            self.NUM_CLASSES = len(set(dataset["labels_new"])) # find number of classes (using the whole dataset)
+
+            # * TODO: complete desc
+            self.MODEL_DESCRIPTION = f"{model_type}[{language}][batch_size={str(batch_size)}][epochs={str(epochs)}][vocab_size={str(self.VOCAB_SIZE)}][emb_dim={str(self.EMBEDDING_DIM)}]"
+
+            print(f"> Parameters imported for {model_type}")
 
         else:
-            print("> More will come!")
+            print(f"> ERROR: model type {model_type} not available. Please choose between 'LSTM_fixed' and 'CNN_fixed'.")
             return None
 
         # 2. GET THE SPLITS
@@ -123,8 +144,23 @@ class PytorchModel():
 
             print(f"> Model '{self.MODEL_TYPE}' instantiated")
 
+        elif model_type == "CNN_fixed":
+
+            self.MODEL = CNN_fixed_len(
+                vocab_size=self.VOCAB_SIZE,
+                embedding_dim=self.EMBEDDING_DIM,
+                num_classes=self.NUM_CLASSES,
+                out_channels=self.OUT_CHANNELS,
+                kernel_size=self.KERNEL_SIZE,
+                stride=self.STRIDE,
+                padding=self.PADDING,
+                dropout=self.DROPOUT_P,
+                device=self.DEVICE
+            ).to(self.DEVICE)
+
         else:
-            print(f"> Error: model '{self.MODEL_TYPE}' not available. Please choose between ['LSTM_fixed']")
+            print(f"> Error: model '{self.MODEL_TYPE}' not available. Please choose between 'LSTM_fixed' and 'CNN_fixed'.")
+            return None
 
         # print execution time
         print(f"> Initialization required {round(time.time() - init_start, 4)} seconds")
@@ -174,19 +210,35 @@ class PytorchModel():
             custom_desc = f"> Epoch {i+1}"
             for x, y, l in tqdm(self.TRAIN_DL, desc=custom_desc):
 
-                # input preprocess
-                x = x.long().to(self.DEVICE)
-                y = y.long().to(self.DEVICE)
+                if self.MODEL_TYPE == "LSTM_fixed":
 
-                # check that there are no NaN or Inf in the tensor
-                assert not torch.isnan(x).any()
-                assert not torch.isnan(y).any()
+                    # input preprocess
+                    x = x.long().to(self.DEVICE)
+                    y = y.long().to(self.DEVICE)
 
-                # forward pass
-                y_pred = self.MODEL(x, l)
-                optimizer.zero_grad()
+                    # check that there are no NaN or Inf in the tensor
+                    assert not torch.isnan(x).any()
+                    assert not torch.isnan(y).any()
 
-                loss = F.cross_entropy(y_pred, y)
+                    # forward pass
+                    y_pred = self.MODEL(x, l)
+
+                    # clean gradientes
+                    optimizer.zero_grad()
+
+                    # obtain loss
+                    loss = F.cross_entropy(y_pred, y)
+
+                elif self.MODEL_TYPE == "CNN_fixed":
+
+                    x = x.to(self.DEVICE)
+                    y = y.type(torch.FloatTensor).to(self.DEVICE)
+                    
+                    # Feed the model
+                    y_pred = self.MODEL(x, l)
+
+                    # obtain loss
+                    loss = F.cross_entropy(y_pred, y.long())       
 
                 # CHECK FOR VANISHING/EXPLODING GRADIENT
                 if torch.isnan(loss):
@@ -507,3 +559,78 @@ class LSTM_fixed_len(torch.nn.Module):
 
         # Decode the hidden state of the last time step and return
         return self.linear(ht[-1])
+
+
+#################################
+# CNN (with fixed length) CLASS
+#################################
+
+class CNN_fixed_len(torch.nn.Module):
+    
+    def __init__(self, vocab_size, embedding_dim, num_classes, out_channels, kernel_size, stride, padding, dropout, device):
+
+        # SETUP
+        self.DEVICE = device
+
+        # calls the constructor of the parent (nn.Module) 
+        # --> so that any initialization done in the super class is still done
+        super(CNN_fixed_len, self).__init__()
+
+        # LAYERS
+
+        # Embedding Layer: a simple lookup table that stores embeddings of a fixed dictionary and size.
+        self.embeddings = nn.Embedding(
+            num_embeddings=vocab_size,      # size of the dictionary of embeddings
+            embedding_dim=embedding_dim,    # the size of each embedding vector
+            padding_idx=0                   # the entries at padding_idx do not contribute to the gradient
+            )
+
+        # Conv1D: Applies a 1D convolution over an input signal composed of several input planes
+        self.conv = nn.Conv1d(
+            in_channels = 1000,                    # number of channels in the input [in our case it is the length of the sequence]
+            out_channels = out_channels,           # number of channels produced by the convolution [16 in the practical example] 
+            kernel_size = kernel_size,             # size of the convolving kernel                  [ 5 in the practical example]
+            stride = stride,                       # stride of the convolution                      [ 1 in the practical example]
+            padding = padding                      # padding of the convolution                     [ 2 in the practical example]
+            )
+
+        # MaxPool1d
+        self.max_pool = nn.MaxPool1d(
+            kernel_size = kernel_size, 
+            stride = stride
+            )
+
+        # Dropout Layer: during training, randomly zeroes some of the elements of the input tensor with probability p using samples from a Bernoulli distribution.
+        self.dropout = nn.Dropout(
+            p=dropout                       # probability of an element to be zeroed
+            )
+
+
+        # Linear Layer: applies a linear transformation to the incoming data
+
+        self.linear = nn.Linear(
+            in_features = 1020,       # size of each input sample
+            out_features = num_classes              # size of each output sample
+            )
+
+
+    def forward(self, x, l):
+
+        # Set initial hidden and cell states 
+        x = self.embeddings(x).to(self.DEVICE)
+    
+        # Convolution layer 1D is applied
+        x = self.conv(x)
+        x = torch.relu(x)
+        x = self.max_pool(x)
+
+        # Pass through fully connected layer
+        out = self.linear(x)
+
+        # apply dropout
+        out = self.dropout(out).to(self.DEVICE)
+
+        # apply sigmoid function
+        out = torch.sigmoid(out)
+        
+        return out.squeeze()
