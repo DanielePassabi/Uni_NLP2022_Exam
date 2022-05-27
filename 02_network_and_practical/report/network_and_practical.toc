@@ -9,11 +9,11 @@
 \contentsline {subsection}{\numberline {4.2}Feature Extraction}{5}{subsection.4.2}%
 \contentsline {subsection}{\numberline {4.3}Implementing the Architectures}{7}{subsection.4.3}%
 \contentsline {subsection}{\numberline {4.4}Training Regime}{8}{subsection.4.4}%
-\contentsline {section}{\numberline {5}Results}{9}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Training Times}{9}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Training Results}{9}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Model Performance}{9}{subsection.5.3}%
-\contentsline {section}{\numberline {6}Discussion}{11}{section.6}%
-\contentsline {subsection}{\numberline {6.1}About the Results}{11}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Ideas for Expanding the Project}{11}{subsection.6.2}%
-\contentsline {section}{Bibliography}{11}{subsection.6.2}%
+\contentsline {section}{\numberline {5}Results}{10}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Training Times}{10}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Training Results}{10}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Model Performance}{10}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Discussion}{12}{section.6}%
+\contentsline {subsection}{\numberline {6.1}About the Results}{12}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Ideas for Expanding the Project}{12}{subsection.6.2}%
+\contentsline {section}{Bibliography}{12}{subsection.6.2}%

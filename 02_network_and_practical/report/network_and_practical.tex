@@ -99,6 +99,7 @@
 % page background color
 \usepackage{xcolor}
 \definecolor{resblack}{RGB}{30,30,30}
+\definecolor{ivory}{RGB}{244,239,233}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -137,10 +138,12 @@
 
 \begin{document}
 
+\pagecolor{ivory}
+
 \title{\textbf{Network and Practical}}
 \author{\textbf{Introduction to ML for Natural Language Processing}\\ \\ Daniele Passabì [221229], Data Science\\}
 
-\date{\textit{\\Multi-class Classification of European Laws in Five Languages\\How do Statistical Models and Recurrent Neural Networks Behave?}}
+\date{\textit{\\Multi-class Classification of European Laws in Five Languages\\How do Neural Networks and Statistical Models Behave?}}
 \maketitle
 \thispagestyle{empty}
 
@@ -150,6 +153,7 @@
 \end{figure}
 
 \newpage
+\pagecolor{white}
 \setcounter{tocdepth}{2}
 \tableofcontents
 \thispagestyle{empty}
@@ -227,13 +231,13 @@ Ultimately, the final dataset consists of 6000 laws, officially translated into 
 
 In order to test the impact of different languages, various architectures were chosen, belonging both to the world of neural networks and statistics.
 
-For reasons of limited space, one architecture per typology is presented in detail: for recurrent neural networks, the functioning of an LSTM is explained in depth; for statistical models, the Linear Support Vector Classifier is illustrated. Nevertheless, the CNN architecture is briefly introduced.
+For reasons of limited space, one architecture per typology is presented in detail: for neural networks, the functioning of an LSTM is explained in depth; for statistical models, the Linear Support Vector Classifier is illustrated. Nevertheless, the CNN architecture is briefly introduced.
 
 \subsection{Long Short Term Memory}
 
-The Long Short Term Memory (LSTM) is a kind of Recurrent Neural Network (RNN). RNNs are a type of networks particularly suited to the use of sequential data, or time series. 
+The Long Short Term Memory (LSTM) is a kind of recurrent neural network (RNN). RNNs are a type of networks particularly suited to the use of sequential data, or time series. 
 
-A distinguishing characteristic from the traditional neural networks is their capacity to have a \textit{memory}: they use information obtained from previous inputs to modify their behaviour on the current input and output. They keep the information of the former inputs in memory for an unspecified time, which depends on the weight of the network nodes and the specific data. Recurrent Neural Networks do not assume that input and output are independent, as traditional networks do, but make their output depend on the previous elements in the sequence. Figure \ref{figure:fnn_vs_rnn} shows the typical structure of a Feedforward Neural Network on the left, and that of a Recurrent Neural Network on the right.
+A distinguishing characteristic from the traditional neural networks is their capacity to have a \textit{memory}: they use information obtained from previous inputs to modify their behaviour on the current input and output. They keep the information of the former inputs in memory for an unspecified time, which depends on the weight of the network nodes and the specific data. Recurrent neural networks do not assume that input and output are independent, as traditional networks do, but make their output depend on the previous elements in the sequence. Figure \ref{figure:fnn_vs_rnn} shows the typical structure of a feedforward neural network on the left, and that of a recurrent neural network on the right.
 
 \vspace{0.25cm}
 \begin{figure}[H]
@@ -243,7 +247,7 @@ A distinguishing characteristic from the traditional neural networks is their ca
   \label{figure:fnn_vs_rnn}
 \end{figure}
 
-Recurrent Neural Networks use an algorithm of \textit{backpropagation through time} to determine gradients. Backpropagation is at the basis of neural networks training, making possible the fine tuning of their weights, based on the results obtained in the previous epochs. The \textit{gradient} refers to the derivative of a function that has more than one input variable; it measures the change in all the weights of the network with respect to the change error. 
+Recurrent neural networks use an algorithm of \textit{backpropagation through time} to determine gradients. Backpropagation is at the basis of neural networks training, making possible the fine tuning of their weights, based on the results obtained in the previous epochs. The \textit{gradient} refers to the derivative of a function that has more than one input variable; it measures the change in all the weights of the network with respect to the change error. 
 
 During this operation, recurrent neural networks tend to encounter two types of problems, both arising from the size of the gradient:
 \begin{itemize}
@@ -276,11 +280,11 @@ LSTMs achieve remarkably high performance on major and complex tasks; these incl
 
 \subsection{Convolutional Neural Network}
 
-Convolutional Neural Networks (CNN) are one of the most renowned algorithms of Deep Learning. Under the Deep Learning category fall all those Artificial Neural Networks that have more than one layer (and are thus called multi-layer architectures).
+Convolutional neural networks (CNN) are one of the most renowned algorithms of deep learning. Under the deep learning category fall all those artificial neural networks that have more than one layer (and are thus called multi-layer architectures).
 
-The layers of CNNs are usually the following: \textit{Convolutional Layer}, \textit{Non-Linearity Layer}, \textit{Pooling Layer} and \textit{Fully Connected Layer}.
+The layers of CNNs are usually the following: \textit{Convolutional Layer}, \textit{Non-Linearity Layer}, \textit{Pooling Layer} and \textit{Fully Connected Layer}. We will explain part of these layers in subsection \ref{subsec:implementation}, concerning the implementation of architectures.
 
-The architectures that use Convolutional Neural Networks have shown over the years that they are able to achieve state of the art results in many Machine Learning problems. CNNs perform particularly well in image classification and computer vision tasks, but they have also proven powerful in problems of Natural Language Processing \cite{Albawi2017UnderstandingOA}.
+The models that use convolutional neural networks have shown over the years that they are able to achieve state of the art results in many Machine Learning problems. CNNs perform particularly well in image classification and computer vision tasks, but they have also proven powerful in problems of Natural Language Processing \cite{Albawi2017UnderstandingOA}.
 
 \subsection{Linear Support Vector Classifier}
 
@@ -332,7 +336,7 @@ The majority of data is prone to the presence of errors and noise. This is parti
 
 The first critical step is data cleaning. In addition to the usual procedures such as removing duplicates, missing data, etc., when working with textual data, one often has to deal with texts that contain spelling mistakes, the use of jargon and symbols that are not useful for learning models. In our specific case, using a dataset of officially translated European laws, we do not have to worry about these issues. 
 
-Furthermore, texts always contain \textit{stopwords}, commonly used terms that do not provide information, and which it is common practice to remove. However, these removal procedures use lists of words considered to be stopwords, but there are no universal rules. In order not to give any advantages to the most frequently used languages, such as English and German, we have decided not to remove them from the texts. Furthermore, working with recurrent neural networks, stopwords could increase the contextual sense of the networks and, contrary to what usually happens in other tasks, improve the performance of the models.
+Furthermore, texts always contain \textit{stopwords}, commonly used terms that do not provide information, and which it is common practice to remove. However, these removal procedures use lists of words considered to be stopwords, but there are no universal rules. In order not to give any advantages to the most frequently used languages, such as English and German, we have decided not to remove them from the texts. Furthermore, working with recurrent neural networks like LSTMs, stopwords could increase the contextual sense of the networks and, contrary to what usually happens in other tasks, improve the performance of the models.
 
 Another technique used when working with texts and natural language is to apply stemming or lemmatization procedures. These are described below.
 \begin{itemize}
@@ -353,7 +357,7 @@ Another technique used when working with texts and natural language is to apply 
 
 However, the same logic of stopwords applies to {stemming} and {lemmatization} procedures, which are therefore not applied to texts.
 
-The dataset has a very high quality: it was thus only necessary to lowercase all words, remove symbols and non-unicode characters, in order to ensure the proper functioning of future architectures.
+It is only fair to mention that the initial dataset has a very high quality: it was thus only necessary to lowercase all words, remove symbols and non-unicode characters, in order to ensure the proper functioning of future architectures.
 
 \subsection{Feature Extraction}
 \label{subsec:feature_extr}
@@ -362,9 +366,9 @@ Feature extraction describes the process of transforming raw data into numerical
 
 There are several ways of extracting information from data, and they change depending on the type of input that is being handled. In the context of this work, the primary focus is on the extraction of features from natural language. The procedures employed are outlined below.
 
-\subsubsection*{Feature Extraction for Recurrent Neural Networks}
+\subsubsection*{Feature Extraction for Neural Networks}
 
-With regard to the creation of features for the recurrent neural networks used, namely Long Short Term Memory and Convolutional Neural Network, we performed the following procedures:
+With regard to the creation of features for the neural networks used, namely long short term memory and convolutional neural network, we performed the following procedures:
 
 \begin{itemize}
   \item \textit{Tokenization}
@@ -375,20 +379,20 @@ With regard to the creation of features for the recurrent neural networks used, 
   
   We count the number of occurrences of each token (word) in our five corpuses.
 
-  This is where we noticed the first difference between the languages: the number of different words used changes considerably, as can be seen in the Table \ref{table:tot_words_for_corpuses}. The German language, for example, uses almost three times as many words as English to describe the same laws.
+  This is where we noticed the first difference between the languages: the number of different unique words used changes considerably, as can be seen in the Table \ref{table:tot_words_for_corpuses}. The German language, for example, uses almost three times as many words as English to describe the same laws.
 
   \begin{table}[H]
     \centering
     \begin{tabular}{|r|c|}
     \hline
-    \multicolumn{1}{|c|}{\textbf{Language}} & \multicolumn{1}{c|}{\textbf{Different Words}} \\ \hline
+    \multicolumn{1}{|c|}{\textbf{Language}} & \multicolumn{1}{c|}{\textbf{Unique Words}} \\ \hline
     English                                 & 31454                                                            \\ \hline
     German                                  & 87084                                                            \\ \hline
     Italian                                 & 44570                                                            \\ \hline
     Polish                                  & 74691                                                            \\ \hline
     Swedish                                 & 79973                                                            \\ \hline
     \end{tabular}
-    \caption{Total number of different words in each language corpus.}
+    \caption{Total number of unique words in each language corpus.}
     \label{table:tot_words_for_corpuses}
   \end{table}
 
@@ -403,14 +407,14 @@ With regard to the creation of features for the recurrent neural networks used, 
     \centering
     \begin{tabular}{|r|c|}
     \hline
-    \multicolumn{1}{|c|}{\textbf{Language}} & \multicolumn{1}{c|}{\textbf{Different Words}} \\ \hline
+    \multicolumn{1}{|c|}{\textbf{Language}} & \multicolumn{1}{c|}{\textbf{Unique Words}} \\ \hline
     English                                 & 3506                                                            \\ \hline
     German                                  & 4216                                                            \\ \hline
     Italian                                 & 4180                                                            \\ \hline
     Polish                                  & 5255                                                            \\ \hline
     Swedish                                 & 4010                                                            \\ \hline
     \end{tabular}
-    \caption{Total number of different words in each language corpus that appears at least 100 times.}
+    \caption{Total number of unique words in each language corpus that appears at least 100 times.}
     \label{table:tot_words_for_corpuses_only_common}
   \end{table}
 
@@ -454,8 +458,9 @@ If a word is repeated many times within the same document, on the contrary, it m
 
 
 \subsection{Implementing the Architectures}
+\label{subsec:implementation}
 
-A brief description of the implementation of the architectures presented in Section \ref{sec:architectures} follows. In the case of recurrent neural networks, we focus on the employed layers.
+A brief description of the implementation of the architectures presented in Section \ref{sec:architectures} follows. In the case of neural networks, we focus on the employed layers.
 
 \subsubsection*{Long Short Term Memory}
 
@@ -476,7 +481,7 @@ In the development of the network, the following layers were used:
   
   During the training phase, some elements of the input tensor are zeroed with probability $p$, using samples of a Bernoulli distribution.
 
-  This technique has proven to be effective in regularising and preventing co-adaptation of neurons \cite{pytorch_dropout}. However, as will be seen in the results section, the networks that performed best were always those in which the dropout probability $p$ was 0. 
+  This technique has proven to be effective in regularising and preventing co-adaptation of neurons \cite{pytorch_dropout}. \hl{However}, as will be seen in the results section, the networks that performed best were always those in which the dropout probability $p$ was 0. 
 \end{itemize}
 
 
@@ -487,9 +492,26 @@ In the development of the network, the following layers were used:
 
 \subsubsection*{Convolutional Neural Network}
 
-This architecture, like the LSTM, was also implemented via \verb|PyTorch|.
+This architecture, like the illustrated one above, has also been implemented using the \verb|PyTorch| framework. Note that some layers are the same as those used for the LSTM and will thus not be explained again.
 
-\hl{\textit{TODO: implementare in Pytorch}}
+\begin{itemize}
+  \item \textit{Embedding Layer}
+  \item \textit{Convolutional 1D Layer}
+  
+  Convolutional layers are one of the main building blocks used in convolutional neural networks. The term \textit{convolution} refers to the application of a filter to an input, which then produces an activation. A repeated application of the same filter to an input produces an activation map, also called a feature map, which indicates the position and strength of a detected feature in an input.
+
+  It is a linear operation involving the multiplication of a set of weights with the input, a common operation in neural networks \cite{CNN_how}.
+  \item \textit{Max Pooling 1D Layer}
+  
+  Pooling layers make it easy to down-sample feature maps. They summarise the presence of features in patches of the feature map. 
+  
+  One of the most widely used pooling levels is max pooling, partly due to its high performance. In this instance, the pooling operation calculates the maximum value in each patch of each feature map \cite{MaxPool_how}.
+  \item \textit{Linear Layer}
+  \item \textit{Dropout Layer}
+\end{itemize}
+
+
+
 
 
 \subsubsection*{Linear Support Vector Classifier}
@@ -505,7 +527,13 @@ During the course of the project, particular emphasis was placed on fine-tuning 
 
 Each dataset was divided upstream into three sets: \textit{training} (3840 texts), \textit{validation} (960 texts) and \textit{test} set (1200 texts). 
 
-When training neural networks, during each epoch the model was trained on the training set and validated on the validation one. Furthermore, we implemented an automatic mechanism capable of saving the model weights of the best epoch based on the average accuracy of the three classes, along with a dataframe containing the training results. This allowed us to understand what occurred during the training and to observe the differences of the individual languages. We will further discuss training results in Section \ref{sec:results}.
+\subsubsection*{Saving the Best Model}
+
+When training neural networks, during each epoch the model was trained on the training set and validated on the validation one. 
+
+As loss we have opted for cross entropy, which is considered suitable for cases of multiclass classification, both when working with statistical models and NNs \cite{cross_entropy}.
+
+Regarding NNs, we implemented an automatic mechanism capable of saving the model weights of the best epoch based on the average accuracy of the three classes, along with a dataframe containing the training results. This allowed us to create some data visualizations and better understand what occurred during the training phase, thus making it possibile to observe the differences between languages. We will further discuss training results in Section \ref{sec:results}.
 
 Saving the results of the Linear SVM statistical model was more straightforward, as we did not have to handle the different epochs.
 
@@ -556,7 +584,7 @@ Each model was trained for a total of 50 epochs, using a batch size of 64. As a 
 
 For this architecture, there are no performance concerns. We therefore trained 7 different models for each language, each with a different value of $C$, the model's only hyperparameter.
 
-$C$ is the parameter responsible for \textit{regularization}, which is inversely proportional to the value. Thus, for high values of $C$ the optimiser will choose a hyperplane with a narrower margin if it correctly classifies all points in the training set. Conversely, a small value of $C$ will cause the optimiser to look for a separating hyperplane with a larger margin, even if this hyperplane incorrectly classifies a greater number of points. 
+$C$ is the parameter responsible for \textit{regularization}, which is inversely proportional to its value. Thus, for high values of $C$ the optimiser will choose a hyperplane with a narrower margin if it correctly classifies all points in the training set. Conversely, a small value of $C$ will cause the optimiser to look for a separating hyperplane with a larger margin, even if this hyperplane incorrectly classifies a greater number of points. 
 
 The values that we tested for the $C$ hyper-parameter are the following: 0.1, 1, 5, 10, 50, 100, 1000.
 
@@ -605,7 +633,9 @@ Risultati del training in Figure \ref{figure:lstm_res}.
 
 \subsection{About the Results}
 
-\textit{TODO: scrivere una volta ottenuti tutti i risultati}
+\hl{TODO: scrivere una volta ottenuti tutti i risultati}
+
+Riflessione su come il LinearSVC sia competitivo verso modelli che impiegano ore ed ore per essere addestrati.
 
 \subsection{Ideas for Expanding the Project}
 

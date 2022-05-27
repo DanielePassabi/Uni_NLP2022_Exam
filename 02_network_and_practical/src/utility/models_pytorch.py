@@ -25,6 +25,7 @@ from sklearn.metrics import mean_squared_error
 # time
 import time
 
+POSSIBLE_CNN_DIMENSIONS = [112, 113, 114, 226, 227, 228, 1014, 1018, 1022, 1026, 2038, 2042, 2046, 2050]
 
 ##############################
 # GENERAL CLASS
@@ -86,7 +87,7 @@ class PytorchModel():
             self.NUM_CLASSES = len(set(dataset["labels_new"])) # find number of classes (using the whole dataset)
 
             # * TODO: complete desc
-            self.MODEL_DESCRIPTION = f"{model_type}[{language}][batch_size={str(batch_size)}][epochs={str(epochs)}][vocab_size={str(self.VOCAB_SIZE)}][emb_dim={str(self.EMBEDDING_DIM)}]"
+            self.MODEL_DESCRIPTION = f"{model_type}[{language}][batch_size={str(batch_size)}][epochs={str(epochs)}][vocab_size={str(self.VOCAB_SIZE)}][emb_dim={str(self.EMBEDDING_DIM)}][kernel_size={str(self.KERNEL_SIZE)}][stride={str(self.STRIDE)}][padding={str(self.PADDING)}][lr={str(self.LEARNING_RATE)}][dropout={str(self.DROPOUT_P)}]"
 
             print(f"> Parameters imported for {model_type}")
 
@@ -181,10 +182,6 @@ class PytorchModel():
         print(f"> Training Started")
         print(f"  - Total Epochs: {self.EPOCHS}")
         print("==================================================================================")
-
-        # Debug loss becoming 'nan'
-        #torch.autograd.set_detect_anomaly(True)
-
 
         # setup loss and optimizers
         parameters = filter(lambda p: p.requires_grad, self.MODEL.parameters())
@@ -565,6 +562,19 @@ class LSTM_fixed_len(torch.nn.Module):
 # CNN (with fixed length) CLASS
 #################################
 
+CNN_LinearLayer_Dims = pd.read_csv("utility/CNN_Linear_Layer_Input_Dim.csv")
+
+def get_correct_input_dim(embedding_dim, kernel_size, stride, padding):
+
+    # get value from df
+    return int(CNN_LinearLayer_Dims.loc[
+        (CNN_LinearLayer_Dims["df_embedding_dim"] == embedding_dim) &
+        (CNN_LinearLayer_Dims["df_kernel_size"] == kernel_size) &
+        (CNN_LinearLayer_Dims["df_stride"] == stride) &
+        (CNN_LinearLayer_Dims["df_padding"] == padding)
+        ]["df_correct_dim"])
+
+
 class CNN_fixed_len(torch.nn.Module):
     
     def __init__(self, vocab_size, embedding_dim, num_classes, out_channels, kernel_size, stride, padding, dropout, device):
@@ -587,8 +597,8 @@ class CNN_fixed_len(torch.nn.Module):
 
         # Conv1D: Applies a 1D convolution over an input signal composed of several input planes
         self.conv = nn.Conv1d(
-            in_channels = 1000,                    # number of channels in the input [in our case it is the length of the sequence]
-            out_channels = out_channels,           # number of channels produced by the convolution [16 in the practical example] 
+            in_channels = 1000,                    # number of channels in the input                [in our case it is the length of the sequence]
+            out_channels = out_channels,           # number of channels produced by the convolution [in our case just 1] 
             kernel_size = kernel_size,             # size of the convolving kernel                  [ 5 in the practical example]
             stride = stride,                       # stride of the convolution                      [ 1 in the practical example]
             padding = padding                      # padding of the convolution                     [ 2 in the practical example]
@@ -606,10 +616,10 @@ class CNN_fixed_len(torch.nn.Module):
             )
 
 
-        # Linear Layer: applies a linear transformation to the incoming data
-
+        # Linear Layer: applies a linear transformation to the incoming data 
+        in_features = get_correct_input_dim(embedding_dim, kernel_size, stride, padding)
         self.linear = nn.Linear(
-            in_features = 1020,       # size of each input sample
+            in_features = in_features,              # size of each input sample
             out_features = num_classes              # size of each output sample
             )
 

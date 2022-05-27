@@ -11,6 +11,13 @@ Vimala Balakrishnan and Ethel Lloyd-Yemoh.
 \newblock Stemming and lemmatization: a comparison of retrieval performances.
 \newblock 2014.
 
+\bibitem{cross_entropy}
+Jason Brownlee.
+\newblock {A Gentle Introduction to Cross-Entropy for Machine Learning}.
+\newblock \\
+  \url{https://machinelearningmastery.com/cross-entropy-for-machine-learning/}.
+\newblock \\Accessed: 2705-2022.
+
 \bibitem{LSTM_gentle_intro}
 Jason Brownlee.
 \newblock {A Gentle Introduction to Long Short-Term Memory Networks by the
@@ -18,6 +25,21 @@ Jason Brownlee.
 \newblock \\
   \url{https://machinelearningmastery.com/gentle-introduction-long-short-term-memory-networks-experts/}.
 \newblock \\Accessed: 23-05-2022.
+
+\bibitem{MaxPool_how}
+Jason Brownlee.
+\newblock {A Gentle Introduction to Pooling Layers for Convolutional Neural
+  Networks}.
+\newblock \\
+  \url{https://machinelearningmastery.com/pooling-layers-for-convolutional-neural-networks/}.
+\newblock \\Accessed: 27-05-2022.
+
+\bibitem{CNN_how}
+Jason Brownlee.
+\newblock {How Do Convolutional Layers Work in Deep Learning Neural Networks?}
+\newblock \\
+  \url{https://machinelearningmastery.com/convolutional-layers-for-deep-learning-neural-networks/}.
+\newblock \\Accessed: 27-05-2022.
 
 \bibitem{Chalkidis2021MultiEURLEXA}
 Ilias Chalkidis, Manos Fergadiotis, and Ion Androutsopoulos.
