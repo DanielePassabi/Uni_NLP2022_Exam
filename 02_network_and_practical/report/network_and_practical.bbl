@@ -41,6 +41,13 @@ Jason Brownlee.
   \url{https://machinelearningmastery.com/convolutional-layers-for-deep-learning-neural-networks/}.
 \newblock \\Accessed: 27-05-2022.
 
+\bibitem{cahyani2021performance}
+Denis~Eka Cahyani and Irene Patasik.
+\newblock Performance comparison of tf-idf and word2vec models for emotion text
+  classification.
+\newblock {\em Bulletin of Electrical Engineering and Informatics},
+  10(5):2780--2788, 2021.
+
 \bibitem{Chalkidis2021MultiEURLEXA}
 Ilias Chalkidis, Manos Fergadiotis, and Ion Androutsopoulos.
 \newblock {MultiEURLEX - A multi-lingual and multi-label legal document

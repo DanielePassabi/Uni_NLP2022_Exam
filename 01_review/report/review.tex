@@ -1,0 +1,257 @@
+\documentclass[letterpaper,11pt]{article}
+\usepackage{tabularx} % extra features for tabular environment
+\usepackage{amsmath}  % improve math presentation
+\usepackage{graphicx} % takes care of graphic including machinery
+\usepackage[margin=0.75in,letterpaper]{geometry} % decreases margins
+\usepackage{cite} % takes care of citations
+\usepackage[final]{hyperref} % adds hyper links inside the generated pdf file
+\hypersetup{
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=black,        % color of internal links
+	citecolor=blue,        % color of links to bibliography
+	filecolor=magenta,     % color of file links
+	urlcolor=blue         
+}
+\usepackage{blindtext}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% MY PACKAGES
+
+% smart par skip
+\usepackage{parskip}
+
+% used to create cute quote 
+\usepackage{csquotes}
+
+% fix annoying positioning
+\usepackage{float}
+
+% cute tables
+\usepackage{booktabs}
+
+% testo intorno a figure
+\usepackage{wrapfig, blindtext}
+
+% used to highlight stuff
+\usepackage{color,soul}
+
+% MORE MATH
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+
+% line breaks in cells
+\usepackage{makecell, boldline}
+
+% fix urls in bib
+\usepackage{etoolbox}
+\appto\UrlBreaks{\do\-}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% CUSTOM SETTINGS
+
+\setlength\parindent{0pt}
+
+% IMAGES SHORTCUT
+\graphicspath{ {./images/} }
+
+% INLINE CODE TEXT
+\definecolor{codegray}{gray}{0.9}
+\newcommand{\code}[1]{\colorbox{codegray}{\texttt{#1}}}
+
+% CUSTOM LINESPREAD
+\linespread{1.05}
+
+% FAST CENTERED IMAGE
+\newcommand{\imgc}[3]{\begin{figure}[H] 
+  \centering
+  \includegraphics[width=#1]{#2}
+  \caption{#3}
+\end{figure}}
+
+% FIX CAPTION SPACE
+\usepackage[font=small,skip=0.25cm]{caption}
+\setlength{\belowcaptionskip}{-0.25cm}
+
+% custom line width
+\makeatletter
+\def\thickhline{%
+  \noalign{\ifnum0=`}\fi\hrule \@height \thickarrayrulewidth \futurelet
+   \reserved@a\@xthickhline}
+\def\@xthickhline{\ifx\reserved@a\thickhline
+               \vskip\doublerulesep
+               \vskip-\thickarrayrulewidth
+             \fi
+      \ifnum0=`{\fi}}
+\makeatother
+
+% custom citations
+\usepackage{cite}
+
+% images wrappers
+
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
+% page background color
+\usepackage{xcolor}
+\definecolor{resblack}{RGB}{30,30,30}
+\definecolor{ivory}{RGB}{244,239,233}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% CUSTOM PYTHON CODE
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\pagecolor{ivory}
+
+\title{\textbf{Review}}
+\author{\textbf{Introduction to ML for Natural Language Processing}\\ \\ Daniele Passabì [221229], Data Science\\}
+
+\date{\textit{\\Inserire qui il testo dell'articolo scelto}}
+\maketitle
+\thispagestyle{empty}
+
+\begin{figure}[H] 
+  \centering
+  \includegraphics[width=4cm]{logo.png}
+\end{figure}
+
+\newpage
+\pagecolor{white}
+\setcounter{tocdepth}{2}
+\tableofcontents
+\thispagestyle{empty}
+
+\newpage
+\clearpage
+\pagenumbering{arabic}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% START HERE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BRIEF SUMMARY OF THE PAPER %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Brief summary of the paper}
+
+\hl{TODO}
+
+\textit{One paragraph, listing the task / problem, the theoretical contribution of the paper, the main result.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% STRENGTH AND WEAKNESSES %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Strength and weaknesses}
+
+\hl{TODO}
+
+\textit{Describe what you liked and disliked about the paper. You can comment on the actual methodology, on its relation to the broader literature, on the validity of the results, and even on the organisation of the paper. Don't be shy and don't hesitate to criticise. No paper is ever perfect.}
+
+
+%%%%%%%%%%%%%%%%%%%%
+% POTENTIAL IMPACT %
+%%%%%%%%%%%%%%%%%%%%
+
+\section{Potential Impact}
+
+\hl{TODO}
+
+\textit{Give a brief comment on whether you think the paper addresses a question that has potentially wide impact on the way we model particular phenomena or deal with particular applications. Take a step back and ask what consequences the work has for other aspects of Computational Linguistics, AI, or Cognitive Science.}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% SOUNDNESS OF THE WORK %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Soundness of the Work}
+
+\hl{TODO}
+
+\textit{This should expand the brief comments you made at the beginning of your review about methodology. Does the experimental work in the paper, in your opinion, answer the research question? Should something have been done differently to ensure the claims can be trusted? If everything seems sound, explain why!}
+
+
+
+%%%%%%%%%%%%%%%%%
+% REPLICABILITY %
+%%%%%%%%%%%%%%%%%
+
+\section{Replicability}
+
+\hl{TODO}
+
+\textit{Remember the general machine learning pipeline, from data preparation to hyperparameter tuning. If you were tasked to reproduce the work done in the paper, what would you be missing? Did the authors fail to include some information about their pipeline? (Most likely, yes!)}
+
+\begin{itemize}
+  \item Esempio: hanno parlato di che iperparametri hanno tunato? Hanno parlato del range di valori utilizzati?
+  \item Potrebbe essere una sezione leggermente più breve delle altre 
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%
+% SUBSTANCE %
+%%%%%%%%%%%%%
+
+\section{Substance}
+
+\hl{TODO}
+
+\textit{Which other important questions could be answered by the paper? This is the place to answer the questions we discussed in class and/or add your own.}
+
+
+%%%%%%%%%%%%%%%%
+% BIBLIOGRAPHY %
+%%%%%%%%%%%%%%%%
+
+% add bib to TOC
+\addcontentsline{toc}{section}{References}
+
+\newpage
+\bibliographystyle{plain}
+\bibliography{biblio}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

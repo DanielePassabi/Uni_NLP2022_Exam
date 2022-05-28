@@ -381,20 +381,20 @@ With regard to the creation of features for the neural networks used, namely lon
 
   This is where we noticed the first difference between the languages: the number of different unique words used changes considerably, as can be seen in the Table \ref{table:tot_words_for_corpuses}. The German language, for example, uses almost three times as many words as English to describe the same laws.
 
-  \begin{table}[H]
+ \begin{table}[H]
     \centering
-    \begin{tabular}{|r|c|}
-    \hline
-    \multicolumn{1}{|c|}{\textbf{Language}} & \multicolumn{1}{c|}{\textbf{Unique Words}} \\ \hline
-    English                                 & 31454                                                            \\ \hline
-    German                                  & 87084                                                            \\ \hline
-    Italian                                 & 44570                                                            \\ \hline
-    Polish                                  & 74691                                                            \\ \hline
-    Swedish                                 & 79973                                                            \\ \hline
+    \begin{tabular}{@{}rl@{}}
+    \toprule
+    \multicolumn{1}{c}{\textbf{Language}} & \textbf{Unique Words} \\ \midrule
+    English                               & 31454                 \\
+    German                                & 87084                 \\
+    Italian                               & 44570                 \\
+    Polish                                & 74691                 \\
+    Swedish                               & 79973                 \\ \bottomrule
     \end{tabular}
     \caption{Total number of unique words in each language corpus.}
     \label{table:tot_words_for_corpuses}
-  \end{table}
+    \end{table}
 
 
   \item \textit{Removal of Uncommon Words}
@@ -405,18 +405,18 @@ With regard to the creation of features for the neural networks used, namely lon
   
   \begin{table}[H]
     \centering
-    \begin{tabular}{|r|c|}
-    \hline
-    \multicolumn{1}{|c|}{\textbf{Language}} & \multicolumn{1}{c|}{\textbf{Unique Words}} \\ \hline
-    English                                 & 3506                                                            \\ \hline
-    German                                  & 4216                                                            \\ \hline
-    Italian                                 & 4180                                                            \\ \hline
-    Polish                                  & 5255                                                            \\ \hline
-    Swedish                                 & 4010                                                            \\ \hline
+    \begin{tabular}{@{}rl@{}}
+    \toprule
+    \multicolumn{1}{c}{\textbf{Language}} & \textbf{Unique Words} \\ \midrule
+    English                               & 3506                   \\
+    German                                & 4216                   \\
+    Italian                               & 4180                   \\
+    Polish                                & 5255                   \\
+    Swedish                               & 4010                   \\ \bottomrule
     \end{tabular}
     \caption{Total number of unique words in each language corpus that appears at least 100 times.}
     \label{table:tot_words_for_corpuses_only_common}
-  \end{table}
+    \end{table}
 
   After this adjustment, the disparity between languages in the number of different words has softened, but is still present.
 
@@ -481,7 +481,7 @@ In the development of the network, the following layers were used:
   
   During the training phase, some elements of the input tensor are zeroed with probability $p$, using samples of a Bernoulli distribution.
 
-  This technique has proven to be effective in regularising and preventing co-adaptation of neurons \cite{pytorch_dropout}. \hl{However}, as will be seen in the results section, the networks that performed best were always those in which the dropout probability $p$ was 0. 
+  This technique has proven to be effective in regularising and preventing co-adaptation of neurons \cite{pytorch_dropout}.
 \end{itemize}
 
 
@@ -525,60 +525,63 @@ During the course of the project, particular emphasis was placed on fine-tuning 
 
 \subsubsection*{Dataset Splits}
 
-Each dataset was divided upstream into three sets: \textit{training} (3840 texts), \textit{validation} (960 texts) and \textit{test} set (1200 texts). 
+Prior to proceeding with the model training phase, each dataset was divided upstream into three sets: 
+\begin{itemize}
+  \item \textit{training set} (3840 texts)
+  \item \textit{validation set} (960 texts)
+  \item \textit{test set} (1200 texts)
+\end{itemize}
 
 \subsubsection*{Saving the Best Model}
 
-When training neural networks, during each epoch the model was trained on the training set and validated on the validation one. 
+\underline{\textit{Neural Networks}} During each epoch the models were trained on the training set and validated on the validation one. As loss we have opted for \textit{cross entropy}, which is considered suitable for cases of multiclass classification, both when working with statistical models and NNs \cite{cross_entropy}.
 
-As loss we have opted for cross entropy, which is considered suitable for cases of multiclass classification, both when working with statistical models and NNs \cite{cross_entropy}.
+We implemented an automatic mechanism capable of saving the model weights of the best epoch based on the average accuracy of the three classes, along with a dataframe containing the training results. The latter was employed to create data visualizations and better understand what occurred during the training phase, thus making it possibile to observe the differences between languages. We will further discuss training results in Section \ref{sec:results}.
 
-Regarding NNs, we implemented an automatic mechanism capable of saving the model weights of the best epoch based on the average accuracy of the three classes, along with a dataframe containing the training results. This allowed us to create some data visualizations and better understand what occurred during the training phase, thus making it possibile to observe the differences between languages. We will further discuss training results in Section \ref{sec:results}.
-
-Saving the results of the Linear SVM statistical model was more straightforward, as we did not have to handle the different epochs.
+\underline{\textit{Statistical Models}} Saving the results of the Linear Support Vector Classifier was straightforward, as we did not have to handle the different epochs. The \textit{squared hinge loss}, proposed as default by the \verb|sklearn| framework, was chosen.
 
 \subsubsection*{Long Short Term Memory}
 
-For each of the five available languages, 16 models were trained, i.e. the combination of a grid search performed on the following hyperparameters.
+For each of the five available languages, 16 models were trained, i.e. the combination of a grid search performed on the hyperparameters shown in Table \ref{table:LSTM_hyperparameters}.
 
-\begin{itemize}
-  \item \textit{Embedding Dim} 
-  \begin{itemize}
-    \vspace{-0.3em}
-    \itemsep-0.35em
-    \item Layer: Embedding
-    \item Tested values: 1024, 2048 
-  \end{itemize}
-  \item \textit{Hidden Dim}
-  \begin{itemize}
-    \vspace{-0.3em}
-    \itemsep-0.35em
-    \item Layer: LSTM
-    \item Tested values: 1024, 2048 
-  \end{itemize}
-  \item \textit{Learning Rate}
-  \begin{itemize}
-    \vspace{-0.3em}
-    \itemsep-0.35em
-    \item Used by Adam optimizer
-    \item Tested values: 0.0001, 0.001
-  \end{itemize}
-  \item \textit{Dropout P}
-  \begin{itemize}
-    \vspace{-0.3em}
-    \itemsep-0.35em
-    \item Layer: Dropout
-    \item Tested values: 0, 0.1 
-  \end{itemize}
-\end{itemize}
-
-
+\begin{table}[H]
+  \centering
+  \begin{tabular}{@{}rll@{}}
+  \toprule
+  \multicolumn{1}{c}{\textbf{Hyperparameter}} & \multicolumn{1}{c}{\textbf{Employed By}} & \textbf{Values Tested} \\ \midrule
+  \textit{Embedding Dim}                               & Embedding Layer                          & 1024, 2048             \\
+  \textit{Hidden Dim}                                  & LSTM Layer                               & 1024, 2048             \\
+  \textit{Dropout Probability}                         & Dropout Layer                            & 0.0001, 0.001          \\
+  \textit{Learning Rate}                               & Adam Optimizer                           & 0, 0.1                 \\ \bottomrule
+\end{tabular}
+\caption{Hyperparameters tested for LSTM networks}
+\label{table:LSTM_hyperparameters}
+\end{table}
 
 Each model was trained for a total of 50 epochs, using a batch size of 64. As a note, we are aware that in order to obtain more robust and reliable results it would have been ideal to increase the number of hyper-parameter values tested, along with the number of epochs. Training times, however, would have risen exponentially. Each complete search grid, which trains 16 models over 50 epochs, takes between 14 and 16 hours on an \textit{RTX2070 Super} GPU, varying according to the language of the texts.
 
 \subsubsection*{Convolutional Neural Network}
 
-\hl{\textit{TODO: implementare in Pytorch}}
+Convolutional neural networks proved to be less computationally demanding than LSTMs. This allowed us to test a higher number of hyperparameters, with a total of 96 models per language (Table \ref{table:CNN_hyperparameters}).
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{@{}rll@{}}
+  \toprule
+  \multicolumn{1}{c}{\textbf{Hyperparameter}} & \multicolumn{1}{c}{\textbf{Employed By}} & \textbf{Values Tested} \\ \midrule
+  \textit{Embedding Dim}                   & Embedding Layer                          & 1024, 2048             \\
+  \textit{Kernel Size}                   & CNN Layer, Max Pooling Layer             & 3, 5, 7                \\
+  \textit{Stride}                   & CNN Layer, Max Pooling Layer             & 1, 3                   \\
+  \textit{Padding}                   & CNN Layer                                & 1, 3                   \\
+  \textit{Dropout Probability}                   & Dropout Layer                            & 0.0001, 0.001          \\
+  \textit{Learning Rate}                   & Adam Optimizer                           & 0, 0.1                 \\ \bottomrule
+  \end{tabular}
+  \caption{Hyperparameters tested for Convolutional Neural Networks}
+  \label{table:CNN_hyperparameters}
+\end{table}
+
+
+As with the LSTMs, the CNNs were also trained for 50 epochs, using a batch size of 64.
 
 \subsubsection*{Linear Support Vector Classifier}
 
@@ -598,17 +601,57 @@ The values that we tested for the $C$ hyper-parameter are the following: 0.1, 1,
 
 \subsection{Training Times}
 
-\hl{Parlare brevemente dei tempi di training.}
+Throughout this project, we have always kept track of the training times of the models. We believe that this can provide useful insights regarding the differences that are present due to the languages, as well as those present due to the different architectures. A table of training times is shown in Figure \ref{fig:training_times}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=12.7cm]{fine_tuning_times.png}
+  \caption{Training Times of the Architectures}
+  \label{fig:training_times}
+\end{figure}
+
+As can be observed from the illustration, the differences in time due to architectures are significantly greater than those due to the language used. There are, however, considerable time fluctuations in CNNs when training a model with German or Swedish texts, compared to other languages. 
+
+It is worth noting, however, that although we have attempted to train the models consistently under the same conditions, the computer may autonomously launch background processes beyond our control that affect the training times.
+
 
 \subsection{Training Results}
 
 \hl{Fare una piccola riflessione sulla fase di training dei modelli e le differenze trovate tra le diverse lingue.}
 
+Prima immagine in Figure \ref{fig:hyperparam_epoch_res}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{hyperparam_res.png}
+  \caption{Best Hyperparameters, Best Epoch and Validation Accuracy for each Architecture}
+  \label{fig:hyperparam_epoch_res}
+\end{figure}
+
 Risultati del training in Figure \ref{figure:lstm_res} and  \ref{figure:cnn_res}.
 
-\subsection{Model Performance}
+\subsection{Model Performances}
 
-\hl{Esporre i risultati ottenuti sul test set dalle 3 architetture.}
+Figure \ref{fig:results} shows the results obtained from the best architectures for each language on the test set. Colours are used in the visualisation to highlight the differences in performance of the models.  
+
+\underline{\textit{LSTM}} LSTM networks have the worst performance despite the highest training times. 
+
+It is interesting to observe how they have the most difficulties classifying German and Swedish texts, which are characterised by a higher loss compared to the other languages and, in the case of German, significantly lower performance.
+
+It can also be seen that, with the exception of just one language, class 1 is always the one with the highest accuracy.
+
+\underline{\textit{CNN}} \hl{TODO: attendere risultati completi}
+
+\underline{\textit{LSVC}} It is very interesting to observe how a statistical model that trains in five seconds on any CPU can compete and outperform neural networks that require hours of training on a dedicated GPU. According to the literature, this can happen thanks to TF-IDF, which is very reliable and leads to higher results than the words embedding employed by neural networks \cite{cahyani2021performance}.
+
+Unlike the LSTMs, this model predicts texts belonging to class 0 more accurately.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{results.png}
+  \caption{Training Times of the Architectures}
+  \label{fig:results}
+\end{figure}
 
 
 \newpage
@@ -668,7 +711,7 @@ The following is a list of suggestions and ideas through which the project could
 %%%%%%%%%%%%%%%%
 
 % add bib to TOC
-\addcontentsline{toc}{section}{Bibliography}
+\addcontentsline{toc}{section}{References}
 
 \newpage
 \bibliographystyle{plain}
