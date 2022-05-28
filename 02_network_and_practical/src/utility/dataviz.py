@@ -35,6 +35,7 @@ def plot_model_fit_loss(train_loss, val_loss, vertical_line=None, subtitle=""):
         fig.add_vline(x=vertical_line, line_width=2, line_dash="dash", line_color="green")
         
     fig.update_xaxes(range=[0.75, max(res_df["epoch"])+0.25])
+    fig.update_yaxes(range=(-0.025, 1.65),constrain='domain')
     fig.show()
 
 
@@ -90,4 +91,5 @@ def plot_classes_accuracy(classes_res_df, vertical_line=None, subtitle=""):
         fig.add_vline(x=vertical_line, line_width=2, line_dash="dash", line_color="green")
 
     fig.update_xaxes(range=[0.75, max(res_df["epoch"])+0.25])
+    fig.update_yaxes(range=(-0.015, 1.015),constrain='domain')
     fig.show()
