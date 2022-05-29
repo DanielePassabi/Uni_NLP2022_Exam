@@ -282,7 +282,7 @@ LSTMs achieve remarkably high performance on major and complex tasks; these incl
 
 Convolutional neural networks (CNN) are one of the most renowned algorithms of deep learning. Under the deep learning category fall all those artificial neural networks that have more than one layer (and are thus called multi-layer architectures).
 
-The layers of CNNs are usually the following: \textit{Convolutional Layer}, \textit{Non-Linearity Layer}, \textit{Pooling Layer} and \textit{Fully Connected Layer}. We will explain part of these layers in subsection \ref{subsec:implementation}, concerning the implementation of architectures.
+The layers of CNNs are usually the following: \textit{Convolutional Layer}, \textit{Non-Linearity Layer}, \textit{Pooling Layer} and \textit{Fully Connected Layer}. We will explain part of these layers in subsection \ref{subsec:implementation}, concerning the implementation of our architectures.
 
 The models that use convolutional neural networks have shown over the years that they are able to achieve state of the art results in many Machine Learning problems. CNNs perform particularly well in image classification and computer vision tasks, but they have also proven powerful in problems of Natural Language Processing \cite{Albawi2017UnderstandingOA}.
 
@@ -379,7 +379,7 @@ With regard to the creation of features for the neural networks used, namely lon
   
   We count the number of occurrences of each token (word) in our five corpuses.
 
-  This is where we noticed the first difference between the languages: the number of different unique words used changes considerably, as can be seen in the Table \ref{table:tot_words_for_corpuses}. The German language, for example, uses almost three times as many words as English to describe the same laws.
+  This is where we noticed the first difference between the languages: the number of different unique words used changes considerably, as can be seen in the Table \ref{table:tot_words_for_corpuses}. The German language, for example, uses almost three times as many words as English to write the same laws.
 
  \begin{table}[H]
     \centering
@@ -392,7 +392,7 @@ With regard to the creation of features for the neural networks used, namely lon
     Polish                                & 74691                 \\
     Swedish                               & 79973                 \\ \bottomrule
     \end{tabular}
-    \caption{Total number of unique words in each language corpus.}
+    \caption{Total number of unique words in each language corpus}
     \label{table:tot_words_for_corpuses}
     \end{table}
 
@@ -414,7 +414,7 @@ With regard to the creation of features for the neural networks used, namely lon
     Polish                                & 5255                   \\
     Swedish                               & 4010                   \\ \bottomrule
     \end{tabular}
-    \caption{Total number of unique words in each language corpus that appears at least 100 times.}
+    \caption{Total number of unique words in each language corpus that appears at least 100 times}
     \label{table:tot_words_for_corpuses_only_common}
     \end{table}
 
@@ -434,7 +434,7 @@ Text Vectorization is a technique that consists of transforming textual data int
 
 One of the most widely adopted techniques for text vectorization is \textit{Term Frequency - Inverse Document Frequency} (TF-IDF), a statistical measure that assesses how relevant a word is to a document in a collection of documents.
 
-In the case of tickets classification, the text of each ticket represents one document.
+In the case of laws classification, the text of each law represents one document.
 
 The TF-IDF score for a word is obtained by multiplying the two metrics that compose the algorithm:
 
@@ -452,7 +452,7 @@ The TF-IDF score for a word is obtained by multiplying the two metrics that comp
 
 Multiplying these two values makes it possible to obtain the TF-IDF of a word in a document. The higher the value, the greater the relevance of the word within a document.
 
-The TF-IDF is an efficient solution to the problem of \textit{stopwords}: since they are frequent words in all documents, they have a value very close to zero and do not become influential for the models.
+The TF-IDF is an efficient solution to the problem of \textit{stopwords}: since they are frequent words in all documents, they have a value very close to zero and do not become influential for the models. The intriguing aspect is that this logic should be applicable to any language.
 
 If a word is repeated many times within the same document, on the contrary, it might indicate its importance. The algorithm is able to detect these subtleties and is a particularly effective way of preparing the input for future architectures.
 
@@ -470,11 +470,17 @@ In the development of the network, the following layers were used:
 \begin{itemize}
   \item \textit{Embedding Layer}
   
+  \vspace{-0.6mm}
+  
   This layer is often used to store and retrieve word embeddings using indexes. The input of the module is a list of indexes and the output is the corresponding word embedding \cite{pytorch_embedding}.
   \item \textit{LSTM Layer}
   
+  \vspace{-0.6mm}
+
   As one can easily deduce from its name, this module is the heart of the network. It applies a multi-layer long short-term memory to an input sequence \cite{pytorch_lstm}.
   \item \textit{Linear Layer}
+  
+  \vspace{-0.6mm}
   
   Its purpose is to apply a linear transformation to the input data \cite{pytorch_linear}.
   \item \textit{Dropout Layer}
@@ -492,7 +498,7 @@ In the development of the network, the following layers were used:
 
 \subsubsection*{Convolutional Neural Network}
 
-This architecture, like the illustrated one above, has also been implemented using the \verb|PyTorch| framework. Note that some layers are the same as those used for the LSTM and will thus not be explained again.
+This architecture, like the illustrated one above, has also been implemented using the \verb|PyTorch| framework. Note: some layers are the same as those employed for the LSTM and will thus not be explained again.
 
 \begin{itemize}
   \item \textit{Embedding Layer}
@@ -536,9 +542,9 @@ Prior to proceeding with the model training phase, each dataset was divided upst
 
 \underline{\textit{Neural Networks}} During each epoch the models were trained on the training set and validated on the validation one. As loss we have opted for \textit{cross entropy}, which is considered suitable for cases of multiclass classification, both when working with statistical models and NNs \cite{cross_entropy}.
 
-We implemented an automatic mechanism capable of saving the model weights of the best epoch based on the average accuracy of the three classes, along with a dataframe containing the training results. The latter was employed to create data visualizations and better understand what occurred during the training phase, thus making it possibile to observe the differences between languages. We will further discuss training results in Section \ref{sec:results}.
+We implemented an automatic mechanism capable of saving the model weights of the best epoch based on the average accuracy of the three classes, along with a dataframe containing the training results. The latter was employed to create data visualizations and better understand what occurred during the training phase, thus making it possibile to observe differences between languages. We will further discuss training results in Section \ref{sec:results}.
 
-\underline{\textit{Statistical Models}} Saving the results of the Linear Support Vector Classifier was straightforward, as we did not have to handle the different epochs. The \textit{squared hinge loss}, proposed as default by the \verb|sklearn| framework, was chosen.
+\underline{\textit{Statistical Models}} Saving the results of the Linear Support Vector Classifiers was straightforward, as we did not have to handle the different epochs. The \textit{squared hinge loss}, proposed as default by the \verb|scikit-learn| framework, was chosen.
 
 \subsubsection*{Long Short Term Memory}
 
@@ -549,20 +555,20 @@ For each of the five available languages, 16 models were trained, i.e. the combi
   \begin{tabular}{@{}rll@{}}
   \toprule
   \multicolumn{1}{c}{\textbf{Hyperparameter}} & \multicolumn{1}{c}{\textbf{Employed By}} & \textbf{Values Tested} \\ \midrule
-  \textit{Embedding Dim}                               & Embedding Layer                          & 1024, 2048             \\
-  \textit{Hidden Dim}                                  & LSTM Layer                               & 1024, 2048             \\
-  \textit{Dropout Probability}                         & Dropout Layer                            & 0.0001, 0.001          \\
-  \textit{Learning Rate}                               & Adam Optimizer                           & 0, 0.1                 \\ \bottomrule
+  \textit{Embedding Dim}                               & Embedding Layer                          & 1024, 2048          \\
+  \textit{Hidden Dim}                                  & LSTM Layer                               & 1024, 2048          \\
+  \textit{Dropout Probability}                         & Dropout Layer                            & 0, 0.1              \\
+  \textit{Learning Rate}                               & Adam Optimizer                           & 0.0001, 0.001       \\ \bottomrule
 \end{tabular}
 \caption{Hyperparameters tested for LSTM networks}
 \label{table:LSTM_hyperparameters}
 \end{table}
 
-Each model was trained for a total of 50 epochs, using a batch size of 64. As a note, we are aware that in order to obtain more robust and reliable results it would have been ideal to increase the number of hyper-parameter values tested, along with the number of epochs. Training times, however, would have risen exponentially. Each complete search grid, which trains 16 models over 50 epochs, takes between 14 and 16 hours on an \textit{RTX2070 Super} GPU, varying according to the language of the texts.
+Each model was trained for a total of 50 epochs, using a batch size of 64. As a note, we are aware that in order to obtain more robust and reliable results it would have been ideal to increase the number of hyper-parameter values tested, along with the number of epochs. Training times, however, would have risen exponentially. Each complete search grid, which trains 16 models over 50 epochs, takes between 14 and 16 hours on an \textit{RTX2070 Super} GPU, slightly varying according to the language of the texts.
 
 \subsubsection*{Convolutional Neural Network}
 
-Convolutional neural networks proved to be less computationally demanding than LSTMs. This allowed us to test a higher number of hyperparameters, with a total of 96 models per language (Table \ref{table:CNN_hyperparameters}).
+Convolutional neural networks proved to be less computationally demanding than LSTMs. This allowed us to test a higher number of hyperparameter values, with a total of 96 models per language (Table \ref{table:CNN_hyperparameters}).
 
 \begin{table}[H]
   \centering
@@ -573,8 +579,8 @@ Convolutional neural networks proved to be less computationally demanding than L
   \textit{Kernel Size}                   & CNN Layer, Max Pooling Layer             & 3, 5, 7                \\
   \textit{Stride}                   & CNN Layer, Max Pooling Layer             & 1, 3                   \\
   \textit{Padding}                   & CNN Layer                                & 1, 3                   \\
-  \textit{Dropout Probability}                   & Dropout Layer                            & 0.0001, 0.001          \\
-  \textit{Learning Rate}                   & Adam Optimizer                           & 0, 0.1                 \\ \bottomrule
+  \textit{Dropout Probability}                   & Dropout Layer                            & 0, 0.1         \\
+  \textit{Learning Rate}                   & Adam Optimizer                           & 0.0001, 0.001                 \\ \bottomrule
   \end{tabular}
   \caption{Hyperparameters tested for Convolutional Neural Networks}
   \label{table:CNN_hyperparameters}
@@ -601,50 +607,50 @@ The values that we tested for the $C$ hyper-parameter are the following: 0.1, 1,
 
 \subsection{Training Times}
 
-Throughout this project, we have always kept track of the training times of the models. We believe that this can provide useful insights regarding the differences that are present due to the languages, as well as those present due to the different architectures. A table of training times is shown in Figure \ref{fig:training_times}.
+Throughout this project we have always kept track of the training times of the models. We believe that this can provide useful insights regarding the differences that are present due to the languages, as well as those present due to the different architectures. A table of training times is shown in Figure \ref{fig:training_times}.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12.7cm]{fine_tuning_times.png}
+  \includegraphics[width=11.2cm]{fine_tuning_times.png}
   \caption{Training Times of the Architectures}
   \label{fig:training_times}
 \end{figure}
 
 As can be observed from the illustration, the differences in time due to architectures are significantly greater than those due to the language used. There are, however, considerable time fluctuations in CNNs when training a model with German or Swedish texts, compared to other languages. 
 
-It is worth noting, however, that although we have attempted to train the models consistently under the same conditions, the computer may autonomously launch background processes beyond our control that affect the training times.
+It is worth noting, however, that although we have attempted to train the models consistently under the same conditions, the computer may autonomously have launched background processes beyond our control that affected training times.
 
+A small technical note: the two neural networks were trained on an \textit{RTX2070 Super} GPU, while the Linear Support Vector Classifier on an \textit{i7-9700k CPU}.
 
 \subsection{Training Results}
 
-\hl{Fare una piccola riflessione sulla fase di training dei modelli e le differenze trovate tra le diverse lingue.}
+Before discussing the performances of the models, it is of interest to focus on the training phase of the architectures. Figure \ref{fig:hyperparam_epoch_res} shows the best hyperparameters chosen by each architecture of each language, together with the best epoch (in the case of neural networks) and the validation accuracy, obtained as the average of the precision of the three different classes.
 
-Prima immagine in Figure \ref{fig:hyperparam_epoch_res}.
+It is immediately evident the disparity in the number of hyperparameters present in the neural networks compared to the statistical model, which only has $C$. The higher the number of hyper-parameters, the more difficult it is to conduct an exhaustive fine-tuning, capable of really giving us the best performance the model can offer. 
+
+It is interesting to note that the same values are always chosen for certain hyper-parameters, as in the case of \textit{embedding dimension} and \textit{dropout p} for LSTMs, \textit{stride} for CNNs and \textit{learning rate} for both. Of the seven values of $C$ tested, 1 always proved to be the best for the LSVCs. 
+
+Another aspect we noticed from the empirical results was that even when changing the value of $C$ by several orders of magnitude, the performance of the model varied negatively by a maximum of 2\%. If we consider that, on the other hand, for ``unlucky'' combinations of hyperparameters the performances of the neural networks halves it is possible to realise how robust the Linear Support Vector Classifier is.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{hyperparam_res.png}
-  \caption{Best Hyperparameters, Best Epoch and Validation Accuracy for each Architecture}
+  \caption{Best Hyperparameters, Best Epoch (when available) and Validation Accuracy for each Architecture}
   \label{fig:hyperparam_epoch_res}
 \end{figure}
 
-Risultati del training in Figure \ref{figure:lstm_res} and  \ref{figure:cnn_res}.
+
+Further interesting insights can be obtained by exploring the two visualisations made for the training phases of the best LSTMs and the CNNs, which can be found in Figure \ref{figure:lstm_res} and  \ref{figure:cnn_res}. The first column shows the graphs depicting training and validation loss for each language. The second shows the accuracy of each class as the epochs increase. In both views, the vertical green dashed line indicates the best epoch chosen for that specific model. 
+
+In the case of the LSTMs, one can see how the \textit{training loss} falls, more or less quickly and steadily depending on the language, until it almost reaches 0, a state that is usually associated with overfitting. The \textit{validation loss}, on the other hand, tends to fall and then rise again, assuming its usual elbow shape. It can be seen that in most cases the mean accuracy of the three classes is the highest just before the validation loss starts to rise again.
+
+In the case of CNNs, however, something a little unusual happens. Both the training loss and the validation loss decrease and remain more or less constant in a value between 0.6 and 0.8. This could happen since we only used one convolutional layer in our architecture, which may not be able to fully capture the complexity of the data.
+
+To confirm this thesis, it can be seen in the second column how the performance on the three classes is not very stable and continuously fluctuates. In the LSTMs this does not happen: after a certain number of epochs, the performance of the three classes stabilises (excluding the case of German).  
 
 \subsection{Model Performances}
 
-Figure \ref{fig:results} shows the results obtained from the best architectures for each language on the test set. Colours are used in the visualisation to highlight the differences in performance of the models.  
-
-\underline{\textit{LSTM}} LSTM networks have the worst performance despite the highest training times. 
-
-It is interesting to observe how they have the most difficulties classifying German and Swedish texts, which are characterised by a higher loss compared to the other languages and, in the case of German, significantly lower performance.
-
-It can also be seen that, with the exception of just one language, class 1 is always the one with the highest accuracy.
-
-\underline{\textit{CNN}} \hl{TODO: attendere risultati completi}
-
-\underline{\textit{LSVC}} It is very interesting to observe how a statistical model that trains in five seconds on any CPU can compete and outperform neural networks that require hours of training on a dedicated GPU. According to the literature, this can happen thanks to TF-IDF, which is very reliable and leads to higher results than the words embedding employed by neural networks \cite{cahyani2021performance}.
-
-Unlike the LSTMs, this model predicts texts belonging to class 0 more accurately.
+Figure \ref{fig:results} shows the results obtained from the best architectures for each language on the test set. Colours are used in the visualisation to highlight the differences in the models performances.  
 
 \begin{figure}[H]
   \centering
@@ -653,6 +659,54 @@ Unlike the LSTMs, this model predicts texts belonging to class 0 more accurately
   \label{fig:results}
 \end{figure}
 
+\underline{\textit{LSTM}} LSTM networks have the worst performance despite the highest training times. 
+
+It is interesting to observe how they have the most difficulties classifying German and Swedish texts, which are characterised by a higher loss compared to the other languages and, in the case of German, significantly lower performance. We would certainly need the opinion of an expert linguist, but our assumption is that German has a high number of compound words, which for people immediately acquire a meaning, but for models are completely different from the two words that compose them. Moreover, in some cases the order of the sentence syntagmas changes completely from the usual (example: the verb is placed at the end of the sentence).
+
+It can be observed from the results that, with the exception of one language, class 1 is always the one with slightly higher accuracy.
+
+\underline{\textit{CNN}} Similarly to what happened in the LSTMs, also in the CNNs the lowest performances are achieved by the German and Swedish models, although the difference between them and the performance of the other models is milder. With this type of network, however, the loss values are very close, with no substantial difference dependent on language.
+
+\underline{\textit{LSVC}} It is very interesting to observe how a statistical model that trains in five seconds on any CPU can compete and outperform neural networks that require hours of training on a dedicated GPU. According to the literature, this can happen thanks to TF-IDF, which is very reliable and leads to higher results than the words embedding employed by neural networks \cite{cahyani2021performance}.
+
+The LSVC models do not seem to be influenced by language, and obtain very satisfactory results in all five cases, with little to no difference between them.
+
+It is worth noting that, in contrast to LSTMs, this model predicts class 0 texts with greater ease and consequent accuracy.
+
+%%%%%%%%%%%%%%
+% DISCUSSION %
+%%%%%%%%%%%%%%
+\section{Discussion}
+
+\subsection{About the Results}
+
+During the course of the project, we trained different architectures, belonging to related but different worlds, that of statistics and machine learning.
+
+Our purpose was to understand whether and to what extent texts in different languages would change the training times and performances of the models. We were able to demonstrate the robustness of TF-IDF, which allowed the Linear Support Vector Classifiers to perform very well regardless of the language used.
+
+The analysis also gave us an opportunity to reflect on the fragility of neural networks, which require to be fine-tuned on a high number of parameters and for considerable time in order to have satisfactory results. LSTMs more than CNNs seem to be susceptible to the language they are trained on, presumably since they are sequential models and as such are more influenced by how the sentence is formed, rather than just the words contained within it.
+
+\subsection{Ideas for Expanding the Project}
+
+During the course of the project, choices were made to simplify the task and the training time required by the models. This was mainly done for reasons of limited time and means at our disposal: having only one graphics card available, certain choices proved necessary.
+
+The following is a list of suggestions and ideas through which the project could be expanded, if we had the means to do so.
+
+\begin{itemize}
+  \item It would first be interesting to use all the texts of the laws at our disposal and repeat the experiment.
+  \item Furthermore, it would also be worthwhile to consider the multi-label task and observe how the architectures behave in different languages.
+  \item Having multiple GPUs available, the experiment could be repeated using all 23 languages from the initial dataset.
+  \item A further idea is to try applying stopwords removal, lemmatization and/or stemming procedures to texts. The aim here is to see if and how the performance of the models changes and if the procedures favour the most common languages.
+  \item With regard to the fine-tuning phase, as already mentioned in the relevant subsection \ref{subsec:fine_tuning}, it would be advisable to extend the range of values used for each hyper-parameter in order to obtain more robust results. 
+  
+  In this regard, there are some implementable refinements that could save time during the fine-tuning phase:
+  \begin{itemize}
+    \item An \textit{early stopping} mechanism could be implemented, which interrupts network training if after $n$ epochs the validation loss has not decreased;
+    \item One could use more efficient tuning algorithms than the ``brute'' search grid, such as the one proposed by the \verb|Keras| framework \cite{omalley2019kerastuner}. 
+  \end{itemize}
+\end{itemize}
+
+% RISULTATI TRAINING [2 black pages]
 
 \newpage
 \pagecolor{resblack}
@@ -678,34 +732,6 @@ Unlike the LSTMs, this model predicts texts belonging to class 0 more accurately
 \end{figure}
 \thispagestyle{empty} 
 
-
-%%%%%%%%%%%%%%
-% DISCUSSION %
-%%%%%%%%%%%%%%
-\newpage
-\pagecolor{white}
-\section{Discussion}
-
-\subsection{About the Results}
-
-\hl{TODO: scrivere una volta ottenuti tutti i risultati}
-
-Riflessione su come il LinearSVC sia competitivo verso modelli che impiegano ore ed ore per essere addestrati.
-
-\subsection{Ideas for Expanding the Project}
-
-During the course of the project, choices were made to simplify the task and the training time required by the models. This was mainly done for reasons of limited time and means at our disposal: having only one graphics card available, certain choices proved necessary.
-
-The following is a list of suggestions and ideas through which the project could be expanded, if we had the means to do so.
-
-\begin{itemize}
-  \item It would first be interesting to use all the texts of the laws at our disposal and repeat the experiment.
-  \item Furthermore, it would also be worthwhile to consider the multi-label task and observe how the architectures behave in different languages.
-  \item Having multiple GPUs avalaible, the experiment could be repeated using all 23 languages from the initial dataset.
-  \item A further idea is to try applying stopword removal, lemmatization and/or stemming procedures to texts. The aim here is to see if and how the performance of the models changes and if the procedures favour the most common languages.
-  \item With regard to the fine-tuning phase, as already mentioned in the relevant subsection \ref{subsec:fine_tuning}, it would be advisable to extend the range of values used for each hyper-parameter in order to obtain more robust results. 
-\end{itemize}
-
 %%%%%%%%%%%%%%%%
 % BIBLIOGRAPHY %
 %%%%%%%%%%%%%%%%
@@ -714,6 +740,7 @@ The following is a list of suggestions and ideas through which the project could
 \addcontentsline{toc}{section}{References}
 
 \newpage
+\pagecolor{white}
 \bibliographystyle{plain}
 \bibliography{biblio}
 

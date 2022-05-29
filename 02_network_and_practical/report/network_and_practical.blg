@@ -6,45 +6,45 @@ The style file: plain.bst
 Reallocating 'name_of_file' (item size: 1) to 7 items.
 Database file #1: biblio.bib
 Warning--empty journal in balakrishnan2014stemming
-You've used 18 entries,
+You've used 19 entries,
             2118 wiz_defined-function locations,
-            594 strings with 7152 characters,
-and the built_in function-call counts, 4731 in all, are:
-= -- 464
-> -- 188
+            599 strings with 7358 characters,
+and the built_in function-call counts, 5127 in all, are:
+= -- 497
+> -- 226
 < -- 1
-+ -- 76
-- -- 58
-* -- 233
-:= -- 806
-add.period$ -- 64
-call.type$ -- 18
-change.case$ -- 83
++ -- 91
+- -- 72
+* -- 263
+:= -- 877
+add.period$ -- 67
+call.type$ -- 19
+change.case$ -- 92
 chr.to.int$ -- 0
-cite$ -- 19
-duplicate$ -- 164
-empty$ -- 425
-format.name$ -- 58
-if$ -- 1005
+cite$ -- 20
+duplicate$ -- 171
+empty$ -- 447
+format.name$ -- 72
+if$ -- 1083
 int.to.chr$ -- 0
-int.to.str$ -- 18
+int.to.str$ -- 19
 missing$ -- 8
-newline$ -- 103
-num.names$ -- 36
-pop$ -- 139
+newline$ -- 108
+num.names$ -- 38
+pop$ -- 152
 preamble$ -- 1
-purify$ -- 65
+purify$ -- 73
 quote$ -- 0
-skip$ -- 115
+skip$ -- 123
 stack$ -- 0
-substring$ -- 225
-swap$ -- 23
+substring$ -- 230
+swap$ -- 24
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 72
+type$ -- 76
 warning$ -- 1
-while$ -- 45
-width$ -- 20
-write$ -- 197
+while$ -- 47
+width$ -- 21
+write$ -- 207
 (There was 1 warning)

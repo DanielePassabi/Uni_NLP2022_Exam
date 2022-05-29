@@ -77,6 +77,12 @@ Prakash~M Nadkarni, Lucila Ohno-Machado, and Wendy~W Chapman.
 \newblock {\em Journal of the American Medical Informatics Association},
   18(5):544--551, 2011.
 
+\bibitem{omalley2019kerastuner}
+Tom O'Malley, Elie Bursztein, James Long, Fran\c{c}ois Chollet, Haifeng Jin,
+  Luca Invernizzi, et~al.
+\newblock Kerastuner.
+\newblock \url{https://github.com/keras-team/keras-tuner}, 2019.
+
 \bibitem{pytorch_dropout}
 PyTorch.
 \newblock {Dropout}.
