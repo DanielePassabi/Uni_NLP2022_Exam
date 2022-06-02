@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.9.9)  29 MAY 2022 14:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.9.9)  2 JUN 2022 18:54
 entering extended mode
 **c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/02_network_and_practical/report/network_and_practical.tex
 (c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/02_network_and_practical/report/network_and_practical.tex
@@ -559,25 +559,25 @@ Package pdftex.def Info: ./images/max_hyperplane.png  used on input line 302.
 <./images/fine_tuning_times.png, id=232, 906.38625pt x 774.64406pt>
 File: ./images/fine_tuning_times.png Graphic file (type png)
 <use ./images/fine_tuning_times.png>
-Package pdftex.def Info: ./images/fine_tuning_times.png  used on input line 614.
-(pdftex.def)             Requested size: 318.67078pt x 272.34695pt.
+Package pdftex.def Info: ./images/fine_tuning_times.png  used on input line 615.
+(pdftex.def)             Requested size: 320.94704pt x 274.29727pt.
  [10 <./images/fine_tuning_times.png>]
 <./images/hyperparam_res.png, id=241, 1379.90532pt x 770.88pt>
 File: ./images/hyperparam_res.png Graphic file (type png)
 <use ./images/hyperparam_res.png>
-Package pdftex.def Info: ./images/hyperparam_res.png  used on input line 637.
+Package pdftex.def Info: ./images/hyperparam_res.png  used on input line 638.
 (pdftex.def)             Requested size: 505.89pt x 282.60982pt.
  [11 <./images/hyperparam_res.png>]
 <./images/results.png, id=252, 1153.30875pt x 770.88pt>
 File: ./images/results.png Graphic file (type png)
 <use ./images/results.png>
-Package pdftex.def Info: ./images/results.png  used on input line 657.
+Package pdftex.def Info: ./images/results.png  used on input line 658.
 (pdftex.def)             Requested size: 505.89pt x 338.14137pt.
  [12 <./images/results.png>] [13] [14]
 <./images/LSTM_training_results.png, id=272, 1743.51375pt x 2714.64188pt>
 File: ./images/LSTM_training_results.png Graphic file (type png)
 <use ./images/LSTM_training_results.png>
-Package pdftex.def Info: ./images/LSTM_training_results.png  used on input line 717.
+Package pdftex.def Info: ./images/LSTM_training_results.png  used on input line 718.
 (pdftex.def)             Requested size: 503.35808pt x 783.70512pt.
 
 Overfull \vbox (59.94785pt too high) has occurred while \output is active []
@@ -586,7 +586,7 @@ Overfull \vbox (59.94785pt too high) has occurred while \output is active []
 <./images/CNN_training_results.png, id=278, 1743.51375pt x 2714.64188pt>
 File: ./images/CNN_training_results.png Graphic file (type png)
 <use ./images/CNN_training_results.png>
-Package pdftex.def Info: ./images/CNN_training_results.png  used on input line 729.
+Package pdftex.def Info: ./images/CNN_training_results.png  used on input line 730.
 (pdftex.def)             Requested size: 503.35808pt x 783.70512pt.
 
 Overfull \vbox (59.94785pt too high) has occurred while \output is active []
@@ -612,15 +612,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 115--121
  []
 
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 749.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 750.
  [18]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 749.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 750.
  (c:/Users\Daniele\Documents\Programmazione\Github\Uni_NLP2022_Exam\02_network_and_practical\report\network_and_practical.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 749.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 749.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 750.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 750.
 Package rerunfilecheck Info: File `network_and_practical.out' has not changed.
 (rerunfilecheck)             Checksum: BDC8BEE14EFA08B2DF798D7A3BD0E034;1197.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 749.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 750.
  ) 
 Here is how much of TeX's memory you used:
  11755 strings out of 480790
@@ -631,7 +631,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  39i,9n,43p,1022b,476s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Daniele\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Users/Daniele/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Daniele/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Daniele/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Daniele/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Daniele/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Daniele/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Daniele/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Daniele/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Daniele/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on c:/Users\Daniele\Documents\Programmazione\Github\Uni_NLP2022_Exam\02_network_and_practical\report\network_and_practical.pdf (20 pages, 1663198 bytes).
+Output written on c:/Users\Daniele\Documents\Programmazione\Github\Uni_NLP2022_Exam\02_network_and_practical\report\network_and_practical.pdf (20 pages, 1663300 bytes).
 PDF statistics:
  362 PDF objects out of 1000 (max. 8388607)
  84 named destinations out of 1000 (max. 500000)

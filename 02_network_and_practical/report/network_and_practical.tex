@@ -197,7 +197,7 @@ The chosen dataset is called \textit{MultiEURLEX} and is available on \href{http
 Of these available languages, five were selected, based on their adoption at European level:
 
 \begin{itemize}
-  \itemsep-0.1em
+  \itemsep-0.43em
   \item \textit{English}, with 51\% EU speakers
   \item \textit{German}, with 32\% EU speakers
   \item \textit{Italian}, with 16\% EU speakers
@@ -206,7 +206,7 @@ Of these available languages, five were selected, based on their adoption at Eur
 \end{itemize}
 
 
-For each text in the dataset, there are one or more labels annotated. However, as can be understood by reading the paper on the dataset, these annotations are \textit{granular} \cite{Chalkidis2021MultiEURLEXA}. This allowed us to keep only the first level of labels, transforming the problem from a multi-label task to a multi-class one. This operation both simplified the classification and facilitated the evaluation of the architectures results.
+For each text in the dataset, there are one or more annotated labels indicating the typology of the law. However, as can be understood by reading the paper on the dataset, these annotations are \textit{granular} \cite{Chalkidis2021MultiEURLEXA}. This allowed us to keep only the first level of labels, transforming the problem from a multi-label task to a multi-class one. This operation both simplified the classification and facilitated the evaluation of the architectures results.
 
 This resulted in 21 different classes being initially present, shown in Figure \ref{fig:original_classes} together with the number of occurrences (texts) available for each of them.
 
@@ -317,7 +317,7 @@ Depending on how close the new observation is to the hyperplane it is also possi
 
 There can exist an infinite number of different hyperplanes able to separate the green observations from the yellow ones. For this reason it is necessary to decide how to choose the \textit{best} hyperplane. An appropriate choice is to use the \textit{maximal margin hyperplane}, which is the hyperplane most distant from the training observations. It depends entirely on the so-called \textit{support vectors}, i.e. the points closest to it that influence its position and orientation. See Figure \ref{figure:max_margin_classifier} for an example.
 
-Until now we have discussed a binary case in which the two classes were linearly separable. In the event that they are not, as it happens in many real world cases, it is no longer possible to find the maximum margin hyperplane. Even if it were possible to find it, using it is not always the best solution: trying to perfectly separate the observations of the two classes makes the maximum margin hyperplane very sensitive to individual observations. It may be a better solution, in many cases, to consider a hyperplane that does not perfectly separate the training observations, but that allows to obtain a higher robustness regarding the individual observations and that correctly classifies most of the training observations.
+Until now we have discussed a binary case in which the two classes were linearly separable. In the event that they are not, as it happens in many real world cases, it is no longer possible to find the maximum margin hyperplane. Even if it were feasible to find it, using it is not always the best solution: trying to perfectly separate the observations of the two classes makes the maximum margin hyperplane very sensitive to individual observations. It may be a better solution, in many cases, to consider a hyperplane that does not perfectly separate the training observations, but that allows to obtain a higher robustness regarding the individual observations and that correctly classifies most of the training observations.
 
 This is indeed the objective of the Linear Support Vector Classifier. The model purposely allows the misclassification of certain observations, in order to correctly classify as many points as possible, while maximising the width of the margin.
 
@@ -487,7 +487,7 @@ In the development of the network, the following layers were used:
   
   During the training phase, some elements of the input tensor are zeroed with probability $p$, using samples of a Bernoulli distribution.
 
-  This technique has proven to be effective in regularising and preventing co-adaptation of neurons \cite{pytorch_dropout}.
+  This technique has proven to be effective in regularising and preventing co-adaptation of neurons \cite{pytorch_dropout}, which refers to those cases in which some neurons are highly dependent on others.
 \end{itemize}
 
 
@@ -533,6 +533,7 @@ During the course of the project, particular emphasis was placed on fine-tuning 
 
 Prior to proceeding with the model training phase, each dataset was divided upstream into three sets: 
 \begin{itemize}
+  \itemsep-0.42em
   \item \textit{training set} (3840 texts)
   \item \textit{validation set} (960 texts)
   \item \textit{test set} (1200 texts)
@@ -544,7 +545,7 @@ Prior to proceeding with the model training phase, each dataset was divided upst
 
 We implemented an automatic mechanism capable of saving the model weights of the best epoch based on the average accuracy of the three classes, along with a dataframe containing the training results. The latter was employed to create data visualizations and better understand what occurred during the training phase, thus making it possibile to observe differences between languages. We will further discuss training results in Section \ref{sec:results}.
 
-\underline{\textit{Statistical Models}} Saving the results of the Linear Support Vector Classifiers was straightforward, as we did not have to handle the different epochs. The \textit{squared hinge loss}, proposed as default by the \verb|scikit-learn| framework, was chosen.
+\underline{\textit{Statistical Models}} Saving the results of the linear support vector classifiers was straightforward, as we did not have to handle the different epochs. The \textit{squared hinge loss}, proposed as default by the \verb|scikit-learn| framework, was chosen.
 
 \subsubsection*{Long Short Term Memory}
 
@@ -611,7 +612,7 @@ Throughout this project we have always kept track of the training times of the m
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=11.2cm]{fine_tuning_times.png}
+  \includegraphics[width=11.28cm]{fine_tuning_times.png}
   \caption{Training Times of the Architectures}
   \label{fig:training_times}
 \end{figure}
@@ -620,17 +621,17 @@ As can be observed from the illustration, the differences in time due to archite
 
 It is worth noting, however, that although we have attempted to train the models consistently under the same conditions, the computer may autonomously have launched background processes beyond our control that affected training times.
 
-A small technical note: the two neural networks were trained on an \textit{RTX2070 Super} GPU, while the Linear Support Vector Classifier on an \textit{i7-9700k CPU}.
+A small technical note: the two neural networks were trained on an \textit{RTX2070 Super} GPU, while the linear support vector classifiers on an \textit{i7-9700K CPU}.
 
 \subsection{Training Results}
 
-Before discussing the performances of the models, it is of interest to focus on the training phase of the architectures. Figure \ref{fig:hyperparam_epoch_res} shows the best hyperparameters chosen by each architecture of each language, together with the best epoch (in the case of neural networks) and the validation accuracy, obtained as the average of the precision of the three different classes.
+Before discussing the performances of the models, it is of interest to focus on the training phase of the architectures. Figure \ref{fig:hyperparam_epoch_res} shows the best hyperparameters chosen for each architecture of each language, together with the best epoch (in the case of neural networks) and the validation accuracy, obtained as the average of the precision of the three different classes.
 
 It is immediately evident the disparity in the number of hyperparameters present in the neural networks compared to the statistical model, which only has $C$. The higher the number of hyper-parameters, the more difficult it is to conduct an exhaustive fine-tuning, capable of really giving us the best performance the model can offer. 
 
 It is interesting to note that the same values are always chosen for certain hyper-parameters, as in the case of \textit{embedding dimension} and \textit{dropout p} for LSTMs, \textit{stride} for CNNs and \textit{learning rate} for both. Of the seven values of $C$ tested, 1 always proved to be the best for the LSVCs. 
 
-Another aspect we noticed from the empirical results was that even when changing the value of $C$ by several orders of magnitude, the performance of the model varied negatively by a maximum of 2\%. If we consider that, on the other hand, for ``unlucky'' combinations of hyperparameters the performances of the neural networks halves it is possible to realise how robust the Linear Support Vector Classifier is.
+Another aspect we noticed from the empirical results was that even when changing the value of $C$ by several orders of magnitude, the performance of the model varied negatively by a maximum of 2\%. If we consider that, on the other hand, for ``unlucky'' combinations of hyperparameters the performances of the neural networks halves it is possible to realise how robust the linear support vector classifier is.
 
 \begin{figure}[H]
   \centering
@@ -640,7 +641,7 @@ Another aspect we noticed from the empirical results was that even when changing
 \end{figure}
 
 
-Further interesting insights can be obtained by exploring the two visualisations made for the training phases of the best LSTMs and the CNNs, which can be found in Figure \ref{figure:lstm_res} and  \ref{figure:cnn_res}. The first column shows the graphs depicting training and validation loss for each language. The second shows the accuracy of each class as the epochs increase. In both views, the vertical green dashed line indicates the best epoch chosen for that specific model. 
+Further interesting insights can be obtained by exploring the two visualisations made for the training phases of the best LSTMs and CNNs, which can be found in Figure \ref{figure:lstm_res} and  \ref{figure:cnn_res}. The first column shows the graphs depicting training and validation loss for each language. The second shows the accuracy of each class as the epochs increase. In both views, the vertical green dashed line indicates the best epoch chosen for that specific model. 
 
 In the case of the LSTMs, one can see how the \textit{training loss} falls, more or less quickly and steadily depending on the language, until it almost reaches 0, a state that is usually associated with overfitting. The \textit{validation loss}, on the other hand, tends to fall and then rise again, assuming its usual elbow shape. It can be seen that in most cases the mean accuracy of the three classes is the highest just before the validation loss starts to rise again.
 
@@ -702,7 +703,7 @@ The following is a list of suggestions and ideas through which the project could
   In this regard, there are some implementable refinements that could save time during the fine-tuning phase:
   \begin{itemize}
     \item An \textit{early stopping} mechanism could be implemented, which interrupts network training if after $n$ epochs the validation loss has not decreased;
-    \item One could use more efficient tuning algorithms than the ``brute'' search grid, such as the one proposed by the \verb|Keras| framework \cite{omalley2019kerastuner}. 
+    \item One could use more efficient tuning algorithms than the ``brute'' grid search, such as the one proposed by the \verb|Keras| framework \cite{omalley2019kerastuner}. 
   \end{itemize}
 \end{itemize}
 
