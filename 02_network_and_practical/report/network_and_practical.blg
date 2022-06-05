@@ -8,7 +8,7 @@ Database file #1: biblio.bib
 Warning--empty journal in balakrishnan2014stemming
 You've used 19 entries,
             2118 wiz_defined-function locations,
-            599 strings with 7358 characters,
+            598 strings with 7337 characters,
 and the built_in function-call counts, 5127 in all, are:
 = -- 497
 > -- 226

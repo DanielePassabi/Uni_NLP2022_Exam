@@ -1,7 +1,7 @@
-\contentsline {section}{\numberline {1}Brief summary of the paper}{1}{section.1}%
+\contentsline {section}{\numberline {1}Summary}{1}{section.1}%
 \contentsline {section}{\numberline {2}Strength and weaknesses}{1}{section.2}%
-\contentsline {section}{\numberline {3}Potential Impact}{1}{section.3}%
-\contentsline {section}{\numberline {4}Soundness of the Work}{1}{section.4}%
-\contentsline {section}{\numberline {5}Replicability}{1}{section.5}%
-\contentsline {section}{\numberline {6}Substance}{1}{section.6}%
-\contentsline {section}{References}{1}{section.6}%
+\contentsline {section}{\numberline {3}Potential Impact}{2}{section.3}%
+\contentsline {section}{\numberline {4}Soundness of the Work}{2}{section.4}%
+\contentsline {section}{\numberline {5}Replicability}{3}{section.5}%
+\contentsline {section}{\numberline {6}Substance}{3}{section.6}%
+\contentsline {section}{References}{4}{section.6}%

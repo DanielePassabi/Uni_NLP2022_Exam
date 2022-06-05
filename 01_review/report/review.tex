@@ -143,7 +143,7 @@
 \title{\textbf{Review}}
 \author{\textbf{Introduction to ML for Natural Language Processing}\\ \\ Daniele Passabì [221229], Data Science\\}
 
-\date{\textit{\\Inserire qui il testo dell'articolo scelto}}
+\date{\textit{\\Making the V in VQA Matter:\\Elevating the Role of Image Understanding in Visual Question Answering}}
 \maketitle
 \thispagestyle{empty}
 
@@ -152,14 +152,15 @@
   \includegraphics[width=4cm]{logo.png}
 \end{figure}
 
-\newpage
-\pagecolor{white}
-\setcounter{tocdepth}{2}
-\tableofcontents
-\thispagestyle{empty}
+% \newpage
+% \pagecolor{white}
+% \setcounter{tocdepth}{2}
+% \tableofcontents
+% \thispagestyle{empty}
 
 \newpage
 \clearpage
+\pagecolor{white}
 \pagenumbering{arabic}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -167,26 +168,30 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% BRIEF SUMMARY OF THE PAPER %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%
+% SUMMARY %
+%%%%%%%%%%%
 
-\section{Brief summary of the paper}
+\section{Summary}
 
-\hl{TODO}
+The paper \cite{goyal2017making} is concerned with \textit{Visual Question Answering} (VQA), a task in computer vision in which a system receives a textual question about an image and has to deduce the answer \cite{kafle2017visual}. According to \textit{Goyal et al.}, the inherent structure of the world we live in and the biases inevitably present in our language are signals that are most easily grasped by machine learning models, which mostly ignore the visual aspect of the data. Using a dataset not constructed keeping these considerations in mind leads to a distorted conception of the real capabilities of the models, which are overestimated.
 
-\textit{One paragraph, listing the task / problem, the theoretical contribution of the paper, the main result.}
+The authors do something that in our opinion research should always do: question itself in order to improve. They expand the dataset proposed by \textit{Antol et al.} \cite{antol2015vqa}, seeking to improve its balance. They then employ the new dataset to test several state-of-the-art VQA models. The results obtained on this balanced dataset are significantly worse than those obtained on the original one. This empirical evidence shows that the models were exploiting language priors, instead of using the combined information of text and image. 
 
+Furthermore, the authors develop a new interpretable architecture: given an input (image, question) the model provides a counter-explanation based on examples. This means that in addition to the answer to the question asked, an image is also returned as output which the model considers visually similar to the one taken as input, but that has a different answer to the question asked.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % STRENGTH AND WEAKNESSES %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Strength and weaknesses}
+\label{sec:procons}
 
-\hl{TODO}
+One of the most striking and convincing points of this article is the way the authors justify every choice behind their actions: this gives the impression that nothing is left to chance. Furthermore, with the exception of a few minor repetitions, the text was written in an extremely clear and concise manner.
 
-\textit{Describe what you liked and disliked about the paper. You can comment on the actual methodology, on its relation to the broader literature, on the validity of the results, and even on the organisation of the paper. Don't be shy and don't hesitate to criticise. No paper is ever perfect.}
+Although it would have been more than sufficient, the authors did not stop at augmenting the dataset and make use of existing architectures. In fact, they even created their own model. An implementation of this kind demonstrates in our opinion a real and deep knowledge of models and architectures, increasing the reader's confidence in the researchers.
+
+It is not obvious to find weaknesses in this paper, which we consider to be very precise and of high quality. The methodology followed by the authors is very robust and will be discussed in detail in section \ref{sec:soundness}. However, one choice we could not help but question is the use of Amazon Mechanical Turk (AMT), employed during the balancing phase of the dataset by the authors, who outsourced the task. Platforms such as AMT are often in the spotlight for ethical and moral issues \cite{fort2011amazon}. The so-called \textit{workers} perform extremely repetitive tasks for very little money and do not benefit from any of the conventional workers' rights. In fact, the platform itself is often labelled a \textit{digital sweatshop}. The authors of the paper do not specify what salary was provided to each worker, which might suggest an unethical use of the already ambiguous platform.
 
 
 %%%%%%%%%%%%%%%%%%%%
@@ -195,10 +200,9 @@
 
 \section{Potential Impact}
 
-\hl{TODO}
+The authors of the article started from an intuition and, thanks to their extensive research, were able to demonstrate for the first time how the models considered to be state-of-the-art in the field of VQA were exploiting the biases present in language. This could potentially be a major milestone from which other researchers can build on and extend the work already accomplished.
 
-\textit{Give a brief comment on whether you think the paper addresses a question that has potentially wide impact on the way we model particular phenomena or deal with particular applications. Take a step back and ask what consequences the work has for other aspects of Computational Linguistics, AI, or Cognitive Science.}
-
+An indication of how much the work of \textit{Goyal et al.} was appreciated and acknowledged may be inferred by using Google Scholar \cite{google_scholar}, a free search engine that indexes the full text and metadata of scientific literature. By searching within the platform for the keyword \textit{``VQA''}, the article we are discussing is the second result (out of about 20 thousands possible papers). Furthermore, at the time of the writing of this review, the paper has more than 1300 citations.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -206,11 +210,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Soundness of the Work}
+\label{sec:soundness}
 
-\hl{TODO}
+We find the methodology followed by the authors of the paper to be nearly flawless: they perceived a problem, questioned the current results obtained in the literature, asked interesting and complex questions that needed to be answered, and finally proceeded in the best possible way to address these questions. 
 
-\textit{This should expand the brief comments you made at the beginning of your review about methodology. Does the experimental work in the paper, in your opinion, answer the research question? Should something have been done differently to ensure the claims can be trusted? If everything seems sound, explain why!}
+Firstly, the motivation behind the enlargement of the initial dataset is very valid. The latter, in fact, presented strong imbalances. For example, as is mentioned in the paper, the answer to questions starting with \textit{``Do you see a''} was yes in 87\% of the cases. The authors' data collection work was commendable: they managed to almost double the size of the original dataset, which was already considerable, obtaining a total of 1.1 million pairs (image, question). To achieve this, they used Amazon Mechanical Turk, a crowdsourcing platform that allowed them to outsource the image selection process. Despite the misgivings we expressed in section \ref{sec:procons}, AMT is a tool that enables valid results, thanks to the possibility of pre-selection of workers.
 
+Testing pre-existing state of the art models in the literature represents another very logical step in the authors' methodology. This choice, along with the one of using a baseline model that does not employ images to make predictions allowed them to empirically demonstrate the presence of language priors and bias in the models, and the extent to which they were not making full use of the information contained in the images.
+
+The models were trained and tested several times, on different combinations of datasets:
+\begin{itemize}
+  \itemsep-0.25em
+  \item $UU$ \verb|    | trained on Unbalanced dataset, tested on Unbalanced dataset
+  \item $UB$ \verb|    | trained on Unbalanced dataset, tested on Balanced dataset
+  \item $B_{half}B$ \verb| | trained on half Balanced dataset, tested on Balanced dataset
+  \item $BB$ \verb|    | trained on Balanced dataset, tested on Balanced dataset
+\end{itemize}
+
+This train/test combination chosen by the authors provides a comprehensive answer to the research question proposed in the article. From the results, one can observe not only how VQA models trained on the unbalanced set decrease in accuracy when tested on the balanced dataset, but also how training performed on a balanced dataset (whether $B_{half}$ or $B$) benefits the performance of the architectures. Out of sheer curiosity, we would be intrigued to have the performance of models trained on $B_{half}$/$B$ and tested on $U$.
+
+Focusing further on the performances of the models, we find the distinction in terms of accuracy based on the type of response the model was intended to give quite logical. In this manner, the authors highlight how the binary case is yet more prone to language bias. The authors' approach hints at how separating the types of possible model responses can simplify the distinction of truly performing models from those that are merely exploiting language priors. 
+
+We conclude this section by discussing the novel model capable of creating counter-examples, which is very difficult to evaluate given the inherent nature of the problem. The authors could have decided the \textit{``rules of the game''} in their favour but, although their results are the highest, they seemed to us to be as unbiased and objective as possible.
 
 
 %%%%%%%%%%%%%%%%%
@@ -218,17 +239,17 @@
 %%%%%%%%%%%%%%%%%
 
 \section{Replicability}
+\label{sec:replicability}
 
-\hl{TODO}
+Thanks to the very detailed explanation on the creation of the balanced dataset using AMT, it would be technically possible for an interested researcher to recreate the data augmentation procedure. Naturally, obtaining exactly the same results as the authors is statistically unlikely, which is why we find it very positive that the final balanced dataset has been made public. This not only allows everyone to assess its quality, but also enables it to be employed for further experiments which could lead to advances in the field of VQA. 
 
-\textit{Remember the general machine learning pipeline, from data preparation to hyperparameter tuning. If you were tasked to reproduce the work done in the paper, what would you be missing? Did the authors fail to include some information about their pipeline? (Most likely, yes!)}
+The tests performed on the models should also be technically straightforward to reproduce, as the architectures used by the authors are public.
 
-\begin{itemize}
-  \item Esempio: hanno parlato di che iperparametri hanno tunato? Hanno parlato del range di valori utilizzati?
-  \item Potrebbe essere una sezione leggermente più breve delle altre 
-\end{itemize}
+Although it can by no means be said that the explanations concerning the model implemented by the researchers are lacking in clarity, when discussing such complex architectures, it is in our opinion preferable to have the code available. Without it, trying to reproduce exactly the same architecture, even if only to verify the same thesis demonstrated by the authors, becomes very complex.
 
+We firmly believe that the world of research should be more balanced between \textit{competition} and \textit{cooperation}. After all, it would not have been possible to write this article without the state-of-the-art VQA models made public, or without the open-source dataset from which the authors started to create their balanced dataset. 
 
+As a final note, we do understand that the paper aims to be very brief and concise, but we would have welcomed some more technical information. For example, what are the hyperparameters chosen for the convolutional networks or LSTMs in the model implemented by the authors? What framework was used to develop the architecture? What means are needed to be able to train models on such a large number of images?
 
 %%%%%%%%%%%%%
 % SUBSTANCE %
@@ -236,10 +257,13 @@
 
 \section{Substance}
 
-\hl{TODO}
+Notwithstanding the fact that the paper was the result of a very extensive work by the authors, there are always means by which one can broaden the work undertaken. Some proposals follow in this section.
 
-\textit{Which other important questions could be answered by the paper? This is the place to answer the questions we discussed in class and/or add your own.}
+In section \textit{4. Benchmarking Existing VQA Models}, the authors argue that more pairs (image, question) could benefit the performance of the models, that could be data starved. This is supported by showing that models trained on $B$ were more accurate than those trained on $B_{half}$. To further confirm this hypothesis, it would be interesting to train the models on progressively fewer observations. Maintaining the authors' logic and notation, the datasets could be $B_{\frac{1}{4}}$, $B_{\frac{1}{8}}$, etc. It would then become possible to show empirically how abundant data benefits VQA architectures.
 
+Concurrently, we believe that it would be of interest to train the models on a fully balanced dataset, even if this means fewer pairs (image, question). This dataset, which we will call $B_{perfectly\_balanced}$, should have the same probability of answering every possible question. For example: if the question is \textit{``Which is the sport being played in the picture?''} the possible answers should be tennis (25\%), football (25\%), swimming (25\%), baseball (25\%).
+
+These approaches would enable to study the trade-off between \textit{balance} and \textit{data abundance}, understanding which of the two aspects is more predominant in determining the architectures' performance.
 
 %%%%%%%%%%%%%%%%
 % BIBLIOGRAPHY %

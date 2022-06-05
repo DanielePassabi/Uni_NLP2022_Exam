@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex network_and_practical"] 1654188292 "network_and_practical.aux" "network_and_practical.bbl" "network_and_practical" 1654188855
+["bibtex network_and_practical"] 1654430563 "network_and_practical.aux" "network_and_practical.bbl" "network_and_practical" 1654430595
   "C:/Users/Daniele/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/plain.bst" 1291868336 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "biblio.bib" 1653826274 6143 136c7cfec4718d55799eaeeaf7be4994 ""
-  "network_and_practical.aux" 1654188855 8363 883097f11d7943829e15fcb1acee1115 "pdflatex"
+  "biblio.bib" 1654430563 6144 d6fc1a6669016d6117a6ccb6f65a2b39 ""
+  "network_and_practical.aux" 1654430566 8363 883097f11d7943829e15fcb1acee1115 "pdflatex"
   (generated)
   "network_and_practical.bbl"
   "network_and_practical.blg"
-["pdflatex"] 1654188852 "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/02_network_and_practical/report/network_and_practical.tex" "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/02_network_and_practical/report/network_and_practical.pdf" "network_and_practical" 1654188855
+["pdflatex"] 1654430564 "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/02_network_and_practical/report/network_and_practical.tex" "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/02_network_and_practical/report/network_and_practical.pdf" "network_and_practical" 1654430595
   "C:/Users/Daniele/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1095.pk" 1642073172 12668 ed0ed638ded82b9bccab97e1e207e1eb ""
   "C:/Users/Daniele/AppData/Local/MiKTeX/fonts/tfm/public/rsfs/rsfs10.tfm" 1622406069 688 37338d6ab346c2f1466b29e195316aa4 ""
   "C:/Users/Daniele/AppData/Local/MiKTeX/fonts/tfm/public/rsfs/rsfs5.tfm" 1622406070 684 3a51bd4fd9600428d5264cf25f04bb9a ""
@@ -122,7 +122,7 @@
   "C:/Users/Daniele/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388494052 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/Daniele/AppData/Local/Programs/MiKTeX/tex/latex/wrapfig/wrapfig.sty" 1044406800 26220 3701aebf80ccdef248c0c20dd062fea9 ""
   "C:/Users/Daniele/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1463135581 57049 34128738f682d033422ca125f82e5d62 ""
-  "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/02_network_and_practical/report/network_and_practical.aux" 1654188855 8363 883097f11d7943829e15fcb1acee1115 ""
+  "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/02_network_and_practical/report/network_and_practical.aux" 1654430566 8363 883097f11d7943829e15fcb1acee1115 ""
   "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/02_network_and_practical/report/network_and_practical.tex" 1654188851 45480 717081f018c989d00203d475f22cfb95 ""
   "images/CNN_training_results.png" 1653773894 637309 0118bccdbad4ca9fc2d670b3b5cc8542 ""
   "images/LSTM_training_results.png" 1653731065 740472 569b72c99c550cfaf5b9510f32a750a4 ""
@@ -134,16 +134,16 @@
   "images/logo.png" 1653660851 53977 5f9fbbc42d123e5cd185da672fdff7c1 ""
   "images/max_hyperplane.png" 1653374854 49774 559e84fb06315f6d53a572c31bf95ebb ""
   "images/results.png" 1653774240 155890 777216027702dd9513cb3bb9cbb15943 ""
-  "network_and_practical.aux" 1654188855 8363 883097f11d7943829e15fcb1acee1115 "pdflatex"
-  "network_and_practical.bbl" 1654188292 4469 330a88cfa24387ee6ddd3574e7c507b8 "bibtex network_and_practical"
-  "network_and_practical.out" 1654188855 1197 bdc8bee14efa08b2df798d7a3bd0e034 "pdflatex"
+  "network_and_practical.aux" 1654430566 8363 883097f11d7943829e15fcb1acee1115 "pdflatex"
+  "network_and_practical.bbl" 1654430563 4470 0ad6981f75c3089642ac54104cf09b39 "bibtex network_and_practical"
+  "network_and_practical.out" 1654430566 1197 bdc8bee14efa08b2df798d7a3bd0e034 "pdflatex"
   "network_and_practical.tex" 1654188851 45480 717081f018c989d00203d475f22cfb95 ""
-  "network_and_practical.toc" 1654188855 1531 b5f45430351ead57366bfc2fe784ebf4 "pdflatex"
+  "network_and_practical.toc" 1654430566 1531 b5f45430351ead57366bfc2fe784ebf4 "pdflatex"
   (generated)
-  "network_and_practical.toc"
-  "network_and_practical.pdf"
   "network_and_practical.log"
-  "network_and_practical.out"
-  "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/02_network_and_practical/report/network_and_practical.pdf"
+  "network_and_practical.pdf"
   "network_and_practical.aux"
+  "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/02_network_and_practical/report/network_and_practical.pdf"
+  "network_and_practical.out"
+  "network_and_practical.toc"
   "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/02_network_and_practical/report/network_and_practical.log"
