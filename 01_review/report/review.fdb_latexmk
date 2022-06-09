@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex review"] 1654450751 "review.aux" "review.bbl" "review" 1654717863
+["bibtex review"] 1654450751 "review.aux" "review.bbl" "review" 1654781433
   "C:/Users/Daniele/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/plain.bst" 1291868336 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "biblio.bib" 1654449628 1446 4c9a9fc0cf8a0a0bb6bc582724afa350 ""
-  "review.aux" 1654717863 1932 ebd8578b92f64899fbd95060d24ea784 "pdflatex"
+  "review.aux" 1654781433 1932 ebd8578b92f64899fbd95060d24ea784 "pdflatex"
   (generated)
-  "review.blg"
   "review.bbl"
-["pdflatex"] 1654717862 "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/01_review/report/review.tex" "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/01_review/report/review.pdf" "review" 1654717863
+  "review.blg"
+["pdflatex"] 1654781432 "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/01_review/report/review.tex" "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/01_review/report/review.pdf" "review" 1654781433
   "C:/Users/Daniele/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1095.pk" 1642073172 12668 ed0ed638ded82b9bccab97e1e207e1eb ""
   "C:/Users/Daniele/AppData/Local/MiKTeX/fonts/tfm/public/rsfs/rsfs10.tfm" 1622406069 688 37338d6ab346c2f1466b29e195316aa4 ""
   "C:/Users/Daniele/AppData/Local/MiKTeX/fonts/tfm/public/rsfs/rsfs5.tfm" 1622406070 684 3a51bd4fd9600428d5264cf25f04bb9a ""
@@ -121,17 +121,17 @@
   "C:/Users/Daniele/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388494052 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/Daniele/AppData/Local/Programs/MiKTeX/tex/latex/wrapfig/wrapfig.sty" 1044406800 26220 3701aebf80ccdef248c0c20dd062fea9 ""
   "C:/Users/Daniele/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1463135581 57049 34128738f682d033422ca125f82e5d62 ""
-  "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/01_review/report/review.aux" 1654717863 1932 ebd8578b92f64899fbd95060d24ea784 ""
-  "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/01_review/report/review.tex" 1654717861 16138 e7f3e06a7e3d42bac134d83f83475054 ""
+  "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/01_review/report/review.aux" 1654781433 1932 ebd8578b92f64899fbd95060d24ea784 ""
+  "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/01_review/report/review.tex" 1654781432 16150 28a610cb9d0a5f4eeb3d1b7b4379685d ""
   "images/logo.png" 1653660851 53977 5f9fbbc42d123e5cd185da672fdff7c1 ""
-  "review.aux" 1654717863 1932 ebd8578b92f64899fbd95060d24ea784 "pdflatex"
+  "review.aux" 1654781433 1932 ebd8578b92f64899fbd95060d24ea784 "pdflatex"
   "review.bbl" 1654450751 1293 455fa06acf1fe7b37b17db6ba8b92d0b "bibtex review"
-  "review.out" 1654717863 344 614e20964b3ea4a264f8e52483cabb13 "pdflatex"
-  "review.tex" 1654717861 16138 e7f3e06a7e3d42bac134d83f83475054 ""
+  "review.out" 1654781433 344 614e20964b3ea4a264f8e52483cabb13 "pdflatex"
+  "review.tex" 1654781432 16150 28a610cb9d0a5f4eeb3d1b7b4379685d ""
   (generated)
+  "review.out"
+  "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/01_review/report/review.pdf"
   "review.aux"
   "review.log"
   "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/01_review/report/review.log"
-  "c:/Users/Daniele/Documents/Programmazione/Github/Uni_NLP2022_Exam/01_review/report/review.pdf"
   "review.pdf"
-  "review.out"

@@ -565,7 +565,7 @@ For each of the five available languages, 16 models were trained, i.e. the combi
 \label{table:LSTM_hyperparameters}
 \end{table}
 
-Each model was trained for a total of 50 epochs, using a batch size of 64. As a note, we are aware that in order to obtain more robust and reliable results it would have been ideal to increase the number of hyper-parameter values tested, along with the number of epochs. Training times, however, would have risen exponentially. Each complete search grid, which trains 16 models over 50 epochs, takes between 14 and 16 hours on an \textit{RTX2070 Super} GPU, slightly varying according to the language of the texts.
+Each model was trained for a total of 50 epochs, using a batch size of 64. As a note, we are aware that in order to obtain more robust and reliable results it would have been ideal to increase the number of hyper-parameter values tested, along with the number of epochs. Training times, however, would have risen exponentially. Each complete search grid, which trains 16 models over 50 epochs, takes between 14 and 16 hours on an \textit{RTX 2070 Super} GPU, slightly varying according to the language of the texts.
 
 \subsubsection*{Convolutional Neural Network}
 
@@ -617,11 +617,11 @@ Throughout this project we have always kept track of the training times of the m
   \label{fig:training_times}
 \end{figure}
 
-As can be observed from the illustration, the differences in time due to architectures are significantly greater than those due to the language used. There are, however, considerable time fluctuations in CNNs when training a model with German or Swedish texts, compared to other languages. 
+As can be observed from the illustration, the differences in time due to architectures are significantly greater than those due to the language used. There are, however, considerable time fluctuations in LSTMs when training a model with German or Swedish texts, compared to other languages. 
 
 It is worth noting, however, that although we have attempted to train the models consistently under the same conditions, the computer may autonomously have launched background processes beyond our control that affected training times.
 
-A small technical note: the two neural networks were trained on an \textit{RTX2070 Super} GPU, while the linear support vector classifiers on an \textit{i7-9700K CPU}.
+A small technical note: the two neural networks were trained on an \textit{RTX 2070 Super} GPU, while the linear support vector classifiers on an \textit{i7-9700K CPU}.
 
 \subsection{Training Results}
 
@@ -656,7 +656,7 @@ Figure \ref{fig:results} shows the results obtained from the best architectures 
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{results.png}
-  \caption{Training Times of the Architectures}
+  \caption{Architectures Performances on Test Set}
   \label{fig:results}
 \end{figure}
 
